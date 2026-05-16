@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import authRoutes from './routes/auth.routes';
+import leadsRoutes from './routes/leads.routes';
 
 const app = express();
 
@@ -14,10 +15,17 @@ app.get('/api/health', (_req: Request, res: Response) => {
 });
 
 app.use('/api', authRoutes);
+app.use('/api', leadsRoutes);
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error('Unhandled error:', err);
-  res.status(500).json({ success: false, message: 'Internal server error' });
+  const statusCode = (err as Error & { statusCode?: number }).statusCode || 500;
+  const message = statusCode === 500 ? 'Internal server error' : err.message;
+
+  if (statusCode === 500) {
+    console.error('Unhandled error:', err);
+  }
+
+  res.status(statusCode).json({ success: false, message });
 });
 
 export default app;
