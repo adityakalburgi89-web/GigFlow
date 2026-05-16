@@ -36,7 +36,7 @@ function validate(state: FormState): FormErrors {
 }
 
 const selectClass =
-  'block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500';
+  'block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white';
 
 export function LeadFormModal({ mode, lead, onClose, onSuccess }: LeadFormModalProps) {
   const [form, setForm] = useState<FormState>({
@@ -76,8 +76,7 @@ export function LeadFormModal({ mode, lead, onClose, onSuccess }: LeadFormModalP
       onSuccess();
     } catch (err: unknown) {
       const msg =
-        (err as { response?: { data?: { message?: string } } })?.response?.data?.message ||
-        'Something went wrong';
+        (err as { response?: { data?: { message?: string } } })?.response?.data?.message || 'Something went wrong';
       setApiError(msg);
     } finally {
       setIsLoading(false);
@@ -87,22 +86,22 @@ export function LeadFormModal({ mode, lead, onClose, onSuccess }: LeadFormModalP
   return (
     <Modal open onClose={onClose} title={mode === 'create' ? 'New Lead' : 'Edit Lead'}>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {apiError && <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{apiError}</div>}
+        {apiError && <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300">{apiError}</div>}
         <Input label="Name" name="name" placeholder="Lead name" value={form.name} onChange={handleChange} error={errors.name} />
         <Input label="Email" name="email" type="email" placeholder="lead@example.com" value={form.email} onChange={handleChange} error={errors.email} />
         <div className="space-y-1">
-          <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
+          <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
           <select id="status" name="status" value={form.status} onChange={handleChange} className={selectClass}>
             {Object.values(LeadStatus).map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
         </div>
         <div className="space-y-1">
-          <label htmlFor="source" className="block text-sm font-medium text-gray-700">Source</label>
+          <label htmlFor="source" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Source</label>
           <select id="source" name="source" value={form.source} onChange={handleChange} className={selectClass}>
             <option value="">Select source</option>
             {Object.values(LeadSource).map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
-          {errors.source && <p className="text-sm text-red-600">{errors.source}</p>}
+          {errors.source && <p className="text-sm text-red-600 dark:text-red-400">{errors.source}</p>}
         </div>
         <div className="flex justify-end gap-3 pt-2">
           <Button variant="secondary" type="button" onClick={onClose} disabled={isLoading}>Cancel</Button>

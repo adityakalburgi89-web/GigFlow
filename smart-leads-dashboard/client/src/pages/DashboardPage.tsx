@@ -8,6 +8,7 @@ import { LeadFilters } from '../components/leads/LeadFilters';
 import { LeadFormModal } from '../components/leads/LeadFormModal';
 import { LeadDeleteConfirm } from '../components/leads/LeadDeleteConfirm';
 import { Pagination } from '../components/leads/Pagination';
+import { Button } from '../components/ui/Button';
 import type { Lead, PaginationMeta, LeadFilters as LeadFiltersType } from '../types';
 
 interface ModalState {
@@ -60,9 +61,7 @@ export default function DashboardPage() {
   };
 
   const handleCreate = () => setModal({ open: true, mode: 'create' });
-
   const handleEdit = (lead: Lead) => setModal({ open: true, mode: 'edit', lead });
-
   const handleDelete = (lead: Lead) => setDeleteTarget(lead);
 
   const handleModalSuccess = () => {
@@ -78,15 +77,13 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Leads</h1>
-            <p className="mt-1 text-sm text-gray-500">
-              Manage your leads, filter, and export data.
-            </p>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Leads</h1>
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your leads, filter, and export data.</p>
           </div>
           <button
             onClick={handleCreate}
@@ -101,17 +98,15 @@ export default function DashboardPage() {
         </div>
 
         {error && (
-          <div className="mb-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</div>
+          <div className="mb-4 flex items-center gap-3 rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300">
+            <span>{error}</span>
+            <Button variant="secondary" size="sm" onClick={fetchLeads}>Retry</Button>
+          </div>
         )}
 
-        <LeadsTable
-          leads={leads}
-          isLoading={isLoading}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
+        <LeadsTable leads={leads} isLoading={isLoading} onEdit={handleEdit} onDelete={handleDelete} />
 
-        {pagination.pages > 1 && (
+        {pagination.pages > 1 && !isLoading && (
           <div className="mt-4">
             <Pagination pagination={pagination} onPageChange={setPage} />
           </div>

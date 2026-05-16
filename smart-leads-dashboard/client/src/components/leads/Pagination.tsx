@@ -18,32 +18,28 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
     }
     result.push(1);
     if (page > 3) result.push('...');
-    for (let i = Math.max(2, page - 1); i <= Math.min(pages - 1, page + 1); i++) {
-      result.push(i);
-    }
+    for (let i = Math.max(2, page - 1); i <= Math.min(pages - 1, page + 1); i++) result.push(i);
     if (page < pages - 2) result.push('...');
     result.push(pages);
     return result;
   };
 
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3">
-      <p className="text-sm text-gray-500">
+    <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 dark:border-gray-700">
+      <p className="text-sm text-gray-500 dark:text-gray-400">
         Showing {start}–{end} of {total} leads
       </p>
       <div className="flex items-center gap-1">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-40"
+          className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-40 dark:text-gray-300 dark:hover:bg-gray-700"
         >
           Previous
         </button>
         {getPages().map((p, i) =>
           p === '...' ? (
-            <span key={`ellipsis-${i}`} className="px-2 text-sm text-gray-400">
-              ...
-            </span>
+            <span key={`ellipsis-${i}`} className="px-2 text-sm text-gray-400 dark:text-gray-500">...</span>
           ) : (
             <button
               key={p}
@@ -51,7 +47,7 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
               className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
                 p === page
                   ? 'bg-indigo-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
               }`}
             >
               {p}
@@ -61,7 +57,7 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= pages}
-          className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-40"
+          className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-40 dark:text-gray-300 dark:hover:bg-gray-700"
         >
           Next
         </button>

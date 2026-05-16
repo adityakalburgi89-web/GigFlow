@@ -10,6 +10,9 @@ interface LeadFiltersProps {
   onFilterChange: (key: string, value: string) => void;
 }
 
+const inputBase =
+  'rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-500';
+
 export function LeadFilters({ filters, onFilterChange }: LeadFiltersProps) {
   const { user } = useAuth();
   const [search, setSearch] = useState(filters.search || '');
@@ -26,40 +29,32 @@ export function LeadFilters({ filters, onFilterChange }: LeadFiltersProps) {
         placeholder="Search name or email..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="block min-w-0 flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className={`block min-w-0 flex-1 ${inputBase}`}
       />
-
       <select
         value={filters.status || ''}
         onChange={(e) => onFilterChange('status', e.target.value)}
-        className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className={inputBase}
       >
         <option value="">All Statuses</option>
-        {Object.values(LeadStatus).map((s) => (
-          <option key={s} value={s}>{s}</option>
-        ))}
+        {Object.values(LeadStatus).map((s) => <option key={s} value={s}>{s}</option>)}
       </select>
-
       <select
         value={filters.source || ''}
         onChange={(e) => onFilterChange('source', e.target.value)}
-        className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className={inputBase}
       >
         <option value="">All Sources</option>
-        {Object.values(LeadSource).map((s) => (
-          <option key={s} value={s}>{s}</option>
-        ))}
+        {Object.values(LeadSource).map((s) => <option key={s} value={s}>{s}</option>)}
       </select>
-
       <select
         value={filters.sort || 'latest'}
         onChange={(e) => onFilterChange('sort', e.target.value)}
-        className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        className={inputBase}
       >
         <option value="latest">Latest</option>
         <option value="oldest">Oldest</option>
       </select>
-
       {user?.role === 'admin' && <ExportButton filters={filters} />}
     </div>
   );
