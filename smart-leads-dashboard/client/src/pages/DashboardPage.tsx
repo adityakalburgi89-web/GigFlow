@@ -11,6 +11,8 @@ import { Button } from '../components/ui/Button';
 import { Alert } from '../components/ui/Alert';
 import { Plus } from 'lucide-react';
 import type { Lead, PaginationMeta, LeadFilters as LeadFiltersType } from '../types';
+import { KpiGrid } from '../components/leads/KpiGrid';
+import { AiInsights } from '../components/leads/AiInsights';
 
 interface ModalState {
   open: boolean;
@@ -27,6 +29,10 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [modal, setModal] = useState<ModalState>({ open: false, mode: 'create' });
   const [deleteTarget, setDeleteTarget] = useState<Lead | null>(null);
+
+  // States for overall KPI Metrics & AI Insights
+  const [statsLeads, setStatsLeads] = useState<Lead[]>([]);
+  const [isStatsLoading, setIsStatsLoading] = useState(true);
 
   const debouncedSearch = useDebounce(filters.search || '', 300);
 
@@ -51,9 +57,25 @@ export default function DashboardPage() {
     }
   }, [filters.status, filters.source, filters.sort, debouncedSearch, page]);
 
+  const fetchStatsLeads = useCallback(async () => {
+    setIsStatsLoading(true);
+    try {
+      const res = await leadsApi.getAll({ limit: 1000 });
+      setStatsLeads(res.data.data ?? []);
+    } catch (err) {
+      console.error('Failed to load dashboard metrics:', err);
+    } finally {
+      setIsStatsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     fetchLeads();
   }, [fetchLeads]);
+
+  useEffect(() => {
+    fetchStatsLeads();
+  }, [fetchStatsLeads]);
 
   const handleFilterChange = useCallback((key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -67,6 +89,7 @@ export default function DashboardPage() {
   const handleModalSuccess = () => {
     setModal({ open: false, mode: 'create' });
     fetchLeads();
+    fetchStatsLeads();
   };
 
   const handleDeleteConfirm = async () => {
@@ -74,6 +97,7 @@ export default function DashboardPage() {
     await leadsApi.delete(deleteTarget._id);
     setDeleteTarget(null);
     fetchLeads();
+    fetchStatsLeads();
   };
 
   return (
@@ -89,6 +113,16 @@ export default function DashboardPage() {
             <Plus size={18} />
             New Lead
           </Button>
+        </div>
+
+        {/* KPI Metrics Summary Grid */}
+        <div className="mb-8">
+          <KpiGrid leads={statsLeads} isLoading={isStatsLoading} />
+        </div>
+
+        {/* Smart AI Insights Panel */}
+        <div className="mb-8">
+          <AiInsights leads={statsLeads} isLoading={isStatsLoading} />
         </div>
 
         <div className="mb-6">
@@ -132,3 +166,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+
