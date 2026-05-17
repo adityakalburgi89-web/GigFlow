@@ -44,7 +44,7 @@ function Header() {
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg transition-transform duration-300 group-hover:scale-105" />
-          <span className="font-serif text-xl font-bold text-foreground tracking-tight">GigFlow</span>
+          <span className="font-serif text-xl font-normal text-foreground tracking-tight">GigFlow</span>
         </Link>
 
         {/* Desktop Nav */}
@@ -912,7 +912,7 @@ function Footer() {
           <div className="md:col-span-2 flex flex-col gap-4">
             <Link to="/" className="flex items-center gap-2.5 group w-fit">
               <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg transition-transform duration-300 group-hover:scale-105" />
-              <span className="font-serif text-xl font-bold text-foreground tracking-tight">GigFlow</span>
+              <span className="font-serif text-xl font-normal text-foreground tracking-tight">GigFlow</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
               The AI-powered revenue infrastructure built to automate leads management, streamline analytical insights, and unlock business potential.

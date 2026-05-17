@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import logo from "../../assets/logo.svg";
 import {
   MessageSquare,
   Send,
@@ -159,7 +160,7 @@ export default function ChatbotWidget() {
       const lower = text.toLowerCase();
 
       if (lower.includes("price") || lower.includes("cost") || lower.includes("pricing") || lower.includes("cheap") || lower.includes("plan")) {
-        botResponseText = "GigFlow has three main pricing options to fit your scale:\n\n• **Starter ($29/mo)**: Search up to 500 leads/mo, basic filters, Slack alerts.\n• **Growth ($79/mo)**: Unlimited lead searches, HubSpot sync, and basic AI scoring.\n• **Pro ($149/mo)**: Advanced AI lead qualification templates, team seats, and API access.\n\nAll plans include a **14-day free trial**! No credit card is required to start. 🚀";
+        botResponseText = "GigFlow has three main pricing options to fit your scale:\n\n• Starter ($29/mo): Search up to 500 leads/mo, basic filters, Slack alerts.\n• Growth ($79/mo): Unlimited lead searches, HubSpot sync, and basic AI scoring.\n• Pro ($149/mo): Advanced AI lead qualification templates, team seats, and API access.\n\nAll plans include a 14-day free trial! No credit card is required to start. 🚀";
       } else if (lower.includes("lead") || lower.includes("scrape") || lower.includes("find") || lower.includes("get") || lower.includes("search")) {
         botResponseText = "GigFlow searches multiple high-value channels (LinkedIn, Google Maps, Twitter, and custom web crawlers) based on your target keywords. Our AI then automatically qualifies their intent, enriches their profiles with validated emails/phones, and list them in your dashboard. It saves founders over 20 hours of manual prospecting per week!";
       } else if (lower.includes("demo") || lower.includes("call") || lower.includes("book") || lower.includes("schedule")) {
@@ -194,7 +195,7 @@ export default function ChatbotWidget() {
     setTimeout(() => {
       const confirmationMsg: Message = {
         id: Math.random().toString(),
-        text: ` **Call Confirmed!**\n\nI've booked a 15-minute dashboard walkthrough for you on **${bookingDate}** at **${bookingTime}**.\n\nA calendar invite and Google Meet link have been sent to **${bookingEmail}**.\n\nWe look forward to speaking with you! 🎉`,
+        text: ` Call Confirmed!\n\nI've booked a 15-minute dashboard walkthrough for you on ${bookingDate} at ${bookingTime}.\n\nA calendar invite and Google Meet link have been sent to ${bookingEmail}.\n\nWe look forward to speaking with you! 🎉`,
         sender: "bot",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -248,10 +249,8 @@ export default function ChatbotWidget() {
               </button>
 
               <div className="flex items-center gap-2 group mb-5">
-                <div className="h-7 w-7 rounded-lg bg-white flex items-center justify-center text-[#0052FF] font-bold shadow-md shadow-blue-600/10">
-                  <Zap size={14} className="fill-[#0052FF]" />
-                </div>
-                <span className="font-serif text-lg font-bold tracking-tight text-white">GigFlow</span>
+                <img src={logo} alt="GigFlow Logo" className="h-7 w-7 object-contain rounded-lg bg-white p-0.5 shadow-md shadow-blue-600/10" />
+                <span className="font-serif text-lg font-normal tracking-tight text-white">GigFlow</span>
               </div>
 
               {/* OVERLAPPING AVATARS */}
@@ -266,7 +265,7 @@ export default function ChatbotWidget() {
                     />
                   ))}
                 </div>
-                <div className="text-xs text-white/95 font-medium flex items-center gap-1.5">
+                <div className="text-xs text-white/95 font-normal flex items-center gap-1.5">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
@@ -309,7 +308,7 @@ export default function ChatbotWidget() {
                       {filteredFaqs.length > 0 ? (
                         filteredFaqs.map((faq, i) => (
                           <div key={i} className="border-b border-slate-100 last:border-0 pb-3 last:pb-0">
-                            <h4 className="text-sm font-semibold text-slate-800 mb-1">{faq.q}</h4>
+                            <h4 className="text-sm font-normal text-slate-800 mb-1">{faq.q}</h4>
                             <p className="text-xs text-slate-500 leading-relaxed">{faq.a}</p>
                           </div>
                         ))
@@ -330,7 +329,7 @@ export default function ChatbotWidget() {
                             <MessageSquare size={18} />
                           </div>
                           <div>
-                            <h3 className="text-sm font-bold text-slate-800">Ask a question</h3>
+                            <h3 className="text-sm font-normal text-slate-800">Ask a question</h3>
                             <p className="text-xs text-slate-500 mt-0.5">We are here to help you live.</p>
                           </div>
                         </div>
@@ -347,7 +346,7 @@ export default function ChatbotWidget() {
                             <Calendar size={18} />
                           </div>
                           <div>
-                            <h3 className="text-sm font-bold text-slate-800">Book a call</h3>
+                            <h3 className="text-sm font-normal text-slate-800">Book a call</h3>
                             <p className="text-xs text-slate-500 mt-0.5">Walkthrough custom features.</p>
                           </div>
                         </div>
@@ -360,7 +359,7 @@ export default function ChatbotWidget() {
                           <Sparkles size={18} />
                         </div>
                         <div>
-                          <h3 className="text-sm font-bold text-slate-800">Highest Search Coverage</h3>
+                          <h3 className="text-sm font-normal text-slate-800">Highest Search Coverage</h3>
                           <p className="text-xs text-slate-500 mt-0.5">Verified mail/phone scraping infrastructure.</p>
                         </div>
                       </div>
@@ -378,7 +377,7 @@ export default function ChatbotWidget() {
                                 onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
                                 className="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none"
                               >
-                                <span className="text-xs font-semibold text-slate-700">{faq.q}</span>
+                                <span className="text-xs font-normal text-slate-700">{faq.q}</span>
                                 <ChevronDown
                                   size={14}
                                   className={`text-slate-400 transition-transform ${expandedFaq === i ? "rotate-180" : ""}`}
@@ -424,13 +423,11 @@ export default function ChatbotWidget() {
                         <div className="flex items-center gap-1.5 mb-1 px-1">
                           {msg.sender === "bot" ? (
                             <>
-                              <div className="h-4 w-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[8px] font-bold">
-                                G
-                              </div>
-                              <span className="text-[10px] text-slate-400 font-medium">Giga Bot</span>
+                              <img src={logo} alt="Giga Bot" className="h-4 w-4 rounded-full object-contain bg-white p-0.5 border border-slate-200" />
+                              <span className="text-[10px] text-slate-400 font-normal">Giga Bot</span>
                             </>
                           ) : (
-                            <span className="text-[10px] text-slate-400 font-medium">You</span>
+                            <span className="text-[10px] text-slate-400 font-normal">You</span>
                           )}
                           <span className="text-[9px] text-slate-400">• {msg.timestamp}</span>
                         </div>
@@ -450,10 +447,8 @@ export default function ChatbotWidget() {
                     {isTyping && (
                       <div className="flex flex-col items-start">
                         <div className="flex items-center gap-1.5 mb-1 px-1">
-                          <div className="h-4 w-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[8px] font-bold">
-                            G
-                          </div>
-                          <span className="text-[10px] text-slate-400 font-medium">Giga Bot is typing</span>
+                          <img src={logo} alt="Giga Bot" className="h-4 w-4 rounded-full object-contain bg-white p-0.5 border border-slate-200" />
+                          <span className="text-[10px] text-slate-400 font-normal">Giga Bot is typing</span>
                         </div>
                         <div className="bg-slate-100 border border-slate-200/30 rounded-2xl rounded-tl-sm px-4 py-2.5 flex items-center gap-1">
                           <span className="h-2 w-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -470,19 +465,19 @@ export default function ChatbotWidget() {
                     <div className="p-3 bg-slate-50 border-t border-slate-100 shrink-0 flex flex-wrap gap-1.5 justify-center">
                       <button
                         onClick={() => handleSendMessage("Tell me about GigFlow ⚡")}
-                        className="text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
+                        className="text-[11px] font-normal bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
                       >
                         Tell me about GigFlow ⚡
                       </button>
                       <button
                         onClick={() => handleSendMessage("How does AI lead scoring work? 🧠")}
-                        className="text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
+                        className="text-[11px] font-normal bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
                       >
                         AI Lead Scoring 🧠
                       </button>
                       <button
                         onClick={() => handleSendMessage("What are the pricing plans? 💰")}
-                        className="text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
+                        className="text-[11px] font-normal bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
                       >
                         Pricing Plans 💰
                       </button>
@@ -531,11 +526,11 @@ export default function ChatbotWidget() {
                       className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative overflow-hidden"
                     >
                       {/* Brand indicator tag */}
-                      <span className="text-[9px] font-bold px-2 py-0.5 bg-blue-50 text-[#0052FF] rounded-full border border-blue-100/50">
+                      <span className="text-[9px] font-normal px-2 py-0.5 bg-blue-50 text-[#0052FF] rounded-full border border-blue-100/50">
                         {item.tag}
                       </span>
 
-                      <h3 className="text-sm font-bold text-slate-800 mt-2.5">{item.title}</h3>
+                      <h3 className="text-sm font-normal text-slate-800 mt-2.5">{item.title}</h3>
                       <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-1 mb-2">
                         <Clock size={11} />
                         <span>Released {item.date}</span>
@@ -549,7 +544,7 @@ export default function ChatbotWidget() {
                       <div className="mt-3.5 pt-2 border-t border-slate-50 flex items-center justify-between">
                         <button
                           onClick={() => handleLikeUpdate(item.id)}
-                          className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg transition-all border ${likedUpdates[item.id]
+                          className={`flex items-center gap-1.5 text-[11px] font-normal px-2.5 py-1 rounded-lg transition-all border ${likedUpdates[item.id]
                             ? "bg-blue-500 text-white border-blue-600"
                             : "bg-slate-50 hover:bg-slate-100 text-slate-500 border-slate-200/50"
                             }`}
@@ -573,7 +568,7 @@ export default function ChatbotWidget() {
                   setActiveTab("home");
                   setShowCalendar(false);
                 }}
-                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "home" && !showCalendar
+                className={`flex flex-col items-center gap-1 text-[10px] font-normal transition-all ${activeTab === "home" && !showCalendar
                   ? "text-[#0052FF]"
                   : "text-slate-400 hover:text-slate-600"
                   }`}
@@ -587,7 +582,7 @@ export default function ChatbotWidget() {
                   setActiveTab("messages");
                   setShowCalendar(false);
                 }}
-                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "messages" && !showCalendar
+                className={`flex flex-col items-center gap-1 text-[10px] font-normal transition-all ${activeTab === "messages" && !showCalendar
                   ? "text-[#0052FF]"
                   : "text-slate-400 hover:text-slate-600"
                   }`}
@@ -601,7 +596,7 @@ export default function ChatbotWidget() {
                   setActiveTab("updates");
                   setShowCalendar(false);
                 }}
-                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "updates" && !showCalendar
+                className={`flex flex-col items-center gap-1 text-[10px] font-normal transition-all ${activeTab === "updates" && !showCalendar
                   ? "text-[#0052FF]"
                   : "text-slate-400 hover:text-slate-600"
                   }`}
@@ -623,7 +618,7 @@ export default function ChatbotWidget() {
                   <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4 shrink-0">
                     <div className="flex items-center gap-2">
                       <Calendar className="text-indigo-500" size={18} />
-                      <span className="font-serif text-sm font-bold text-slate-800">Schedule Quick Call</span>
+                      <span className="font-serif text-sm font-normal text-slate-800">Schedule Quick Call</span>
                     </div>
                     <button
                       onClick={() => setShowCalendar(false)}
@@ -638,7 +633,7 @@ export default function ChatbotWidget() {
                       <div className="h-14 w-14 rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center mb-4 animate-bounce">
                         <CheckCircle2 size={32} />
                       </div>
-                      <h3 className="text-base font-bold text-slate-800">Processing Schedule...</h3>
+                      <h3 className="text-base font-normal text-slate-800">Processing Schedule...</h3>
                       <p className="text-xs text-slate-400 mt-1 max-w-[220px]">Saving your slot and sending calendar invitations...</p>
                     </div>
                   ) : (
@@ -653,7 +648,7 @@ export default function ChatbotWidget() {
                                 key={date}
                                 type="button"
                                 onClick={() => setBookingDate(date)}
-                                className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingDate === date
+                                className={`text-[11px] font-normal py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingDate === date
                                   ? "bg-[#0052FF] text-white border-blue-600 shadow-sm"
                                   : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
                                   }`}
@@ -673,7 +668,7 @@ export default function ChatbotWidget() {
                                 key={time}
                                 type="button"
                                 onClick={() => setBookingTime(time)}
-                                className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingTime === time
+                                className={`text-[11px] font-normal py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingTime === time
                                   ? "bg-indigo-600 text-white border-indigo-700 shadow-sm"
                                   : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
                                   }`}
@@ -704,7 +699,7 @@ export default function ChatbotWidget() {
                       <button
                         type="submit"
                         disabled={!bookingDate || !bookingTime || !bookingEmail}
-                        className="w-full bg-[#0052FF] disabled:bg-slate-300 text-white font-semibold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:scale-[1.01]"
+                        className="w-full bg-[#0052FF] disabled:bg-slate-300 text-white font-normal py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:scale-[1.01]"
                       >
                         Confirm Booking <ArrowRight size={13} />
                       </button>

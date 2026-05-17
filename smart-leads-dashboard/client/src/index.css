@@ -45,6 +45,7 @@
   * {
     scrollbar-width: thin;
     scrollbar-color: var(--color-border) transparent;
+    font-weight: 400 !important;
   }
 
   body {

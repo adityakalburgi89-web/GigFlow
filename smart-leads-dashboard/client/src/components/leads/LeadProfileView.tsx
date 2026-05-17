@@ -273,10 +273,10 @@ export function LeadProfileView({
                   <div className="flex items-center justify-between gap-4 mb-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
                     <div>
                       <div className="text-[10px] text-slate-400 uppercase tracking-[0.1em] font-mono">Lead Match Quality</div>
-                      <div className="text-2xl font-bold text-slate-800 mt-0.5 font-serif">94% Fit Score</div>
+                      <div className="text-2xl text-slate-800 mt-0.5 font-serif">94% Fit Score</div>
                     </div>
                     
-                    <div className="shrink-0 flex items-center justify-center h-11 w-11 rounded-full border-2 border-emerald-500 text-emerald-500 text-xs font-bold bg-emerald-50">
+                    <div className="shrink-0 flex items-center justify-center h-11 w-11 rounded-full border-2 border-emerald-500 text-emerald-500 text-xs bg-emerald-50">
                       High
                     </div>
                   </div>

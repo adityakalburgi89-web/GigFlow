@@ -60,7 +60,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
           </div>
         </div>
         <div className="mt-4">
-          <h3 className="text-3xl font-bold tracking-tight text-foreground">{totalLeads}</h3>
+          <h3 className="text-3xl tracking-tight text-foreground">{totalLeads}</h3>
           <p className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
             <span className="text-emerald-500 font-semibold flex items-center">
               +12% <ArrowUpRight size={12} />
@@ -80,10 +80,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
         </div>
         <div className="mt-4">
           <div className="flex items-baseline gap-2">
-            <h3 className="text-3xl font-bold tracking-tight text-foreground">{conversionRate}%</h3>
-            <span className="text-xs text-emerald-500 font-semibold bg-emerald-50 dark:bg-emerald-950/30 px-1.5 py-0.5 rounded border border-emerald-100 dark:border-emerald-900/50">
-              Qualified
-            </span>
+            <h3 className="text-3xl tracking-tight text-foreground">{conversionRate}%</h3>
           </div>
           {/* Custom micro SVG progress bar */}
           <div className="mt-3.5 h-1.5 w-full rounded-full bg-muted overflow-hidden">
@@ -105,7 +102,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
           </div>
         </div>
         <div className="mt-4">
-          <h3 className="text-3xl font-bold tracking-tight text-foreground">{newLeads}</h3>
+          <h3 className="text-3xl tracking-tight text-foreground">{newLeads}</h3>
           <p className="mt-1 text-xs text-muted-foreground flex items-center gap-1.5">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
             Unattended inquiries
@@ -122,7 +119,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
           </div>
         </div>
         <div className="mt-4">
-          <h3 className="text-3xl font-bold tracking-tight text-foreground">{topSource}</h3>
+          <h3 className="text-3xl tracking-tight text-foreground">{topSource}</h3>
           <div className="mt-2.5 flex items-center justify-between text-xs text-muted-foreground">
             <span>Volume share</span>
             <span className="font-semibold text-foreground">{topSourcePct}%</span>

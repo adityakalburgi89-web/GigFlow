@@ -87,7 +87,7 @@ export default function RegisterPage() {
           {/* Logo brand */}
           <Link to="/" className="inline-flex items-center gap-2.5 group">
             <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg transition-transform duration-300 group-hover:scale-105" />
-            <span className="font-serif text-xl font-bold text-foreground">GigFlow</span>
+            <span className="font-serif text-xl font-normal text-foreground">GigFlow</span>
           </Link>
 
           <div>
