@@ -3,6 +3,7 @@ import {
   X, Mail, Calendar, Compass,
   Sparkles, Send, Edit, Trash2, Clock
 } from 'lucide-react';
+import { FaUserCircle } from 'react-icons/fa';
 import { leads as leadsApi } from '../../services/api';
 import { Button } from '../ui/Button';
 import { Spinner } from '../ui/Spinner';
@@ -147,13 +148,6 @@ export function LeadProfileView({
 
   if (!lead) return null;
 
-  const initials = lead.name
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-
   const formattedDate = new Date(lead.createdAt).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
@@ -193,8 +187,8 @@ export function LeadProfileView({
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div className="flex items-center gap-4">
               {/* Lead Avatar Container */}
-              <div className="h-14 w-14 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-white text-lg font-bold font-serif shadow-sm shrink-0">
-                {initials}
+              <div className="h-14 w-14 rounded-xl bg-gradient-to-tr from-[#0052FF] to-[#4D7CFF] flex items-center justify-center text-white shadow-sm shrink-0">
+                <FaUserCircle size={28} />
               </div>
               <div>
                 <h2 className="text-2xl font-serif text-slate-900 leading-tight">
