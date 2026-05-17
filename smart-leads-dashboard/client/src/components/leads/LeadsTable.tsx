@@ -8,14 +8,19 @@ interface LeadsTableProps {
   onDelete: (lead: Lead) => void;
 }
 
-function SkeletonRow() {
+function SkeletonRow({ index }: { index: number }) {
+  // Use deterministic widths to prevent layout thrashing and React warnings
+  const widths = [70, 85, 60, 75, 80, 65, 90, 68, 72, 88];
   return (
     <tr className="border-b border-gray-100 dark:border-gray-700">
-      {Array.from({ length: 6 }).map((_, i) => (
-        <td key={i} className="px-4 py-3">
-          <div className="h-4 animate-pulse rounded bg-gray-200 dark:bg-gray-700" style={{ width: `${60 + Math.random() * 30}%` }} />
-        </td>
-      ))}
+      {Array.from({ length: 6 }).map((_, i) => {
+        const width = widths[(index * 6 + i) % widths.length];
+        return (
+          <td key={i} className="px-4 py-3">
+            <div className="h-4 animate-pulse rounded bg-gray-200 dark:bg-gray-700" style={{ width: `${width}%` }} />
+          </td>
+        );
+      })}
     </tr>
   );
 }
@@ -33,7 +38,7 @@ export function LeadsTable({ leads, isLoading, onEdit, onDelete }: LeadsTablePro
             </tr>
           </thead>
           <tbody>
-            {Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} />)}
+            {Array.from({ length: 5 }).map((_, i) => <SkeletonRow key={i} index={i} />)}
           </tbody>
         </table>
       </div>

@@ -9,8 +9,14 @@ import type {
   PaginationMeta,
 } from '../types';
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
+if (!VITE_API_URL) {
+  throw new Error('VITE_API_URL environment variable is missing. Check your .env file or build arguments.');
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: VITE_API_URL,
 });
 
 api.interceptors.request.use((config) => {

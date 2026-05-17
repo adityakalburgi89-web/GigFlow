@@ -15,7 +15,7 @@ export function ExportButton({ filters }: ExportButtonProps) {
     try {
       await leadsApi.exportCSV(filters);
     } catch {
-      // Silently fail — the download may be blocked by the browser
+      alert("Failed to export CSV. Please try again or contact support.");
     } finally {
       setIsLoading(false);
     }

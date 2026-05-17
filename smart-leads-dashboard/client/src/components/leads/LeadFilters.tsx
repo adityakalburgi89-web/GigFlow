@@ -20,7 +20,7 @@ export function LeadFilters({ filters, onFilterChange }: LeadFiltersProps) {
 
   useEffect(() => {
     onFilterChange('search', debouncedSearch);
-  }, [debouncedSearch]);
+  }, [debouncedSearch, onFilterChange]);
 
   return (
     <div className="flex flex-wrap items-center gap-3">

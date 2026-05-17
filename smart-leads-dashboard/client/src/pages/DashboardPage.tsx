@@ -18,7 +18,6 @@ interface ModalState {
 }
 
 export default function DashboardPage() {
-  const { user } = useAuth();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [pagination, setPagination] = useState<PaginationMeta>({ page: 1, limit: 10, total: 0, pages: 0 });
   const [filters, setFilters] = useState<LeadFiltersType>({ search: '', status: '', source: '', sort: 'latest' });
@@ -55,10 +54,10 @@ export default function DashboardPage() {
     fetchLeads();
   }, [fetchLeads]);
 
-  const handleFilterChange = (key: string, value: string) => {
+  const handleFilterChange = useCallback((key: string, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
     setPage(1);
-  };
+  }, []);
 
   const handleCreate = () => setModal({ open: true, mode: 'create' });
   const handleEdit = (lead: Lead) => setModal({ open: true, mode: 'edit', lead });
