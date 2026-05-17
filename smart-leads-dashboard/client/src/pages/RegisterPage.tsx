@@ -76,7 +76,7 @@ export default function RegisterPage() {
     <div className="grid min-h-screen lg:grid-cols-2 bg-background selection:bg-accent/20">
       
       {/* Side A: Registration Form Panel */}
-      <div className="flex items-center justify-center px-6 sm:px-10 lg:px-16 py-12 relative overflow-hidden">
+      <div className="flex items-center justify-center px-6 sm:px-10 lg:px-16 py-12 relative overflow-hidden lg:order-last">
         
         {/* Ambient decorative glowing blobs */}
         <div className="absolute top-[-100px] left-[-100px] w-[350px] h-[350px] bg-accent/5 rounded-full blur-[100px] pointer-events-none" />
@@ -154,7 +154,7 @@ export default function RegisterPage() {
       </div>
 
       {/* Side B: Premium Slate Showcase Panel */}
-      <div className="hidden lg:flex flex-col justify-between bg-slate-950 border-l border-white/5 p-16 relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-between bg-slate-950 border-r border-white/5 p-16 relative overflow-hidden lg:order-first">
         
         {/* dot pattern overlay */}
         <div className="absolute inset-0 dot-pattern opacity-60" />
