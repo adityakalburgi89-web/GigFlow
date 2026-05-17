@@ -22,11 +22,6 @@ import {
 // Support agents data
 const AGENTS = [
   {
-    name: "Sarah J.",
-    role: "Support Lead",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80"
-  },
-  {
     name: "Aditya K.",
     role: "Co-Founder",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100&q=80"
@@ -99,12 +94,12 @@ export default function ChatbotWidget() {
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [unreadBadge, setUnreadBadge] = useState(true);
-  
+
   // Chat States
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "initial",
-      text: "Hi! I'm Giga, your automated support assistant. 🚀\n\nI can help you explore GigFlow, explain our lead scraping automation, or calculate your potential revenue boost. What's on your mind?",
+      text: "Hi! I'm Giga, your automated support assistant. \n\nI can help you explore GigFlow, explain our lead scraping automation, or calculate your potential revenue boost. What's on your mind?",
       sender: "bot",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
@@ -194,17 +189,17 @@ export default function ChatbotWidget() {
     if (!bookingDate || !bookingTime || !bookingEmail) return;
 
     setBookingSuccess(true);
-    
+
     // Add success chat message
     setTimeout(() => {
       const confirmationMsg: Message = {
         id: Math.random().toString(),
-        text: `📅 **Call Confirmed!**\n\nI've booked a 15-minute dashboard walkthrough for you on **${bookingDate}** at **${bookingTime}**.\n\nA calendar invite and Google Meet link have been sent to **${bookingEmail}**.\n\nWe look forward to speaking with you! 🎉`,
+        text: ` **Call Confirmed!**\n\nI've booked a 15-minute dashboard walkthrough for you on **${bookingDate}** at **${bookingTime}**.\n\nA calendar invite and Google Meet link have been sent to **${bookingEmail}**.\n\nWe look forward to speaking with you! 🎉`,
         sender: "bot",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, confirmationMsg]);
-      
+
       // Reset form states
       setBookingDate("");
       setBookingTime("");
@@ -281,7 +276,7 @@ export default function ChatbotWidget() {
               </div>
 
               <h2 className="text-white text-2xl font-serif leading-tight mt-3">
-                Hi 👋 <br />
+                Hi <br />
                 How can we help today?
               </h2>
             </div>
@@ -441,11 +436,10 @@ export default function ChatbotWidget() {
                         </div>
 
                         <div
-                          className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm whitespace-pre-line ${
-                            msg.sender === "user"
-                              ? "bg-[#0052FF] text-white rounded-tr-sm"
-                              : "bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200/30 dark:border-slate-800 rounded-tl-sm"
-                          }`}
+                          className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm whitespace-pre-line ${msg.sender === "user"
+                            ? "bg-[#0052FF] text-white rounded-tr-sm"
+                            : "bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200/30 dark:border-slate-800 rounded-tl-sm"
+                            }`}
                         >
                           {msg.text}
                         </div>
@@ -530,7 +524,7 @@ export default function ChatbotWidget() {
                   className="p-5 space-y-4"
                 >
                   <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2 px-1">Product Changelog</div>
-                  
+
                   {RELEASE_UPDATES.map((item) => (
                     <div
                       key={item.id}
@@ -540,13 +534,13 @@ export default function ChatbotWidget() {
                       <span className="text-[9px] font-bold px-2 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-[#0052FF] rounded-full border border-blue-100/50 dark:border-blue-900/50">
                         {item.tag}
                       </span>
-                      
+
                       <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-2.5">{item.title}</h3>
                       <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-1 mb-2">
                         <Clock size={11} />
                         <span>Released {item.date}</span>
                       </div>
-                      
+
                       <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-900/50 pt-2">
                         {item.desc}
                       </p>
@@ -555,16 +549,15 @@ export default function ChatbotWidget() {
                       <div className="mt-3.5 pt-2 border-t border-slate-50 dark:border-slate-900/50 flex items-center justify-between">
                         <button
                           onClick={() => handleLikeUpdate(item.id)}
-                          className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg transition-all border ${
-                            likedUpdates[item.id]
-                              ? "bg-blue-500 text-white border-blue-600"
-                              : "bg-slate-50 dark:bg-slate-900/60 hover:bg-slate-100 text-slate-500 dark:text-slate-400 border-slate-200/50 dark:border-slate-800"
-                          }`}
+                          className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg transition-all border ${likedUpdates[item.id]
+                            ? "bg-blue-500 text-white border-blue-600"
+                            : "bg-slate-50 dark:bg-slate-900/60 hover:bg-slate-100 text-slate-500 dark:text-slate-400 border-slate-200/50 dark:border-slate-800"
+                            }`}
                         >
                           <ThumbsUp size={11} className={likedUpdates[item.id] ? "fill-white" : ""} />
                           <span>{likedUpdates[item.id] ? "Liked!" : "Love this"} ({updateLikes[item.id]})</span>
                         </button>
-                        
+
                         <span className="text-[10px] text-slate-400">By Sarah Connor</span>
                       </div>
                     </div>
@@ -580,11 +573,10 @@ export default function ChatbotWidget() {
                   setActiveTab("home");
                   setShowCalendar(false);
                 }}
-                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${
-                  activeTab === "home" && !showCalendar
-                    ? "text-[#0052FF]"
-                    : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-                }`}
+                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "home" && !showCalendar
+                  ? "text-[#0052FF]"
+                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  }`}
               >
                 <Home size={18} className={activeTab === "home" && !showCalendar ? "stroke-[2.5px]" : ""} />
                 Home
@@ -595,11 +587,10 @@ export default function ChatbotWidget() {
                   setActiveTab("messages");
                   setShowCalendar(false);
                 }}
-                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${
-                  activeTab === "messages" && !showCalendar
-                    ? "text-[#0052FF]"
-                    : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-                }`}
+                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "messages" && !showCalendar
+                  ? "text-[#0052FF]"
+                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  }`}
               >
                 <MessageSquare size={18} className={activeTab === "messages" && !showCalendar ? "stroke-[2.5px]" : ""} />
                 Messages
@@ -610,11 +601,10 @@ export default function ChatbotWidget() {
                   setActiveTab("updates");
                   setShowCalendar(false);
                 }}
-                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${
-                  activeTab === "updates" && !showCalendar
-                    ? "text-[#0052FF]"
-                    : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
-                }`}
+                className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "updates" && !showCalendar
+                  ? "text-[#0052FF]"
+                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  }`}
               >
                 <Bell size={18} className={activeTab === "updates" && !showCalendar ? "stroke-[2.5px]" : ""} />
                 Updates
@@ -663,11 +653,10 @@ export default function ChatbotWidget() {
                                 key={date}
                                 type="button"
                                 onClick={() => setBookingDate(date)}
-                                className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${
-                                  bookingDate === date
-                                    ? "bg-[#0052FF] text-white border-blue-600 shadow-sm"
-                                    : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
-                                }`}
+                                className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingDate === date
+                                  ? "bg-[#0052FF] text-white border-blue-600 shadow-sm"
+                                  : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                                  }`}
                               >
                                 {date}
                               </button>
@@ -684,11 +673,10 @@ export default function ChatbotWidget() {
                                 key={time}
                                 type="button"
                                 onClick={() => setBookingTime(time)}
-                                className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${
-                                  bookingTime === time
-                                    ? "bg-indigo-600 text-white border-indigo-700 shadow-sm"
-                                    : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
-                                }`}
+                                className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingTime === time
+                                  ? "bg-indigo-600 text-white border-indigo-700 shadow-sm"
+                                  : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                                  }`}
                               >
                                 {time}
                               </button>
@@ -732,11 +720,10 @@ export default function ChatbotWidget() {
       {/* FLOATING TOGGLE BUTTON */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`h-14 w-14 rounded-full flex items-center justify-center text-white cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-all ${
-          isOpen 
-            ? "bg-[#0052FF] shadow-blue-500/25" 
-            : "bg-[#0052FF] shadow-accent-lg"
-        }`}
+        className={`h-14 w-14 rounded-full flex items-center justify-center text-white cursor-pointer shadow-lg hover:scale-105 active:scale-95 transition-all ${isOpen
+          ? "bg-[#0052FF] shadow-blue-500/25"
+          : "bg-[#0052FF] shadow-accent-lg"
+          }`}
         aria-label="Toggle support chatbot"
       >
         {isOpen ? (

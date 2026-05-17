@@ -13,6 +13,7 @@ import { Plus } from 'lucide-react';
 import type { Lead, PaginationMeta, LeadFilters as LeadFiltersType } from '../types';
 import { KpiGrid } from '../components/leads/KpiGrid';
 import { AiInsights } from '../components/leads/AiInsights';
+import { LeadProfileView } from '../components/leads/LeadProfileView';
 
 interface ModalState {
   open: boolean;
@@ -29,6 +30,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [modal, setModal] = useState<ModalState>({ open: false, mode: 'create' });
   const [deleteTarget, setDeleteTarget] = useState<Lead | null>(null);
+  const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
 
   // States for overall KPI Metrics & AI Insights
   const [statsLeads, setStatsLeads] = useState<Lead[]>([]);
@@ -138,7 +140,13 @@ export default function DashboardPage() {
           </div>
         )}
 
-        <LeadsTable leads={leads} isLoading={isLoading} onEdit={handleEdit} onDelete={handleDelete} />
+        <LeadsTable 
+          leads={leads} 
+          isLoading={isLoading} 
+          onEdit={handleEdit} 
+          onDelete={handleDelete} 
+          onViewProfile={(lead) => setSelectedLeadId(lead._id)} 
+        />
 
         {pagination.pages > 1 && !isLoading && (
           <div className="mt-4">
@@ -161,6 +169,25 @@ export default function DashboardPage() {
           lead={deleteTarget}
           onClose={() => setDeleteTarget(null)}
           onConfirm={handleDeleteConfirm}
+        />
+      )}
+
+      {selectedLeadId && (
+        <LeadProfileView
+          leadId={selectedLeadId}
+          onClose={() => setSelectedLeadId(null)}
+          onUpdateSuccess={() => {
+            fetchLeads();
+            fetchStatsLeads();
+          }}
+          onEdit={(lead) => {
+            setSelectedLeadId(null);
+            handleEdit(lead);
+          }}
+          onDelete={(lead) => {
+            setSelectedLeadId(null);
+            handleDelete(lead);
+          }}
         />
       )}
     </div>

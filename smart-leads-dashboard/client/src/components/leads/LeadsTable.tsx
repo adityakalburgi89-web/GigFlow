@@ -7,6 +7,7 @@ interface LeadsTableProps {
   isLoading: boolean;
   onEdit: (lead: Lead) => void;
   onDelete: (lead: Lead) => void;
+  onViewProfile: (lead: Lead) => void;
 }
 
 function SkeletonRow({ index }: { index: number }) {
@@ -27,7 +28,7 @@ function SkeletonRow({ index }: { index: number }) {
 
 const headerCells = ['Name', 'Email', 'Status', 'Source', 'Created At', 'Actions'];
 
-export function LeadsTable({ leads, isLoading, onEdit, onDelete }: LeadsTableProps) {
+export function LeadsTable({ leads, isLoading, onEdit, onDelete, onViewProfile }: LeadsTableProps) {
   if (isLoading) {
     return (
       <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
@@ -71,7 +72,7 @@ export function LeadsTable({ leads, isLoading, onEdit, onDelete }: LeadsTablePro
         </thead>
         <tbody>
           {leads.map((lead) => (
-            <LeadRow key={lead._id} lead={lead} onEdit={onEdit} onDelete={onDelete} />
+            <LeadRow key={lead._id} lead={lead} onEdit={onEdit} onDelete={onDelete} onViewProfile={onViewProfile} />
           ))}
         </tbody>
       </table>
