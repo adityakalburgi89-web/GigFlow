@@ -95,7 +95,7 @@ export function AiInsights({ leads, isLoading }: AiInsightsProps) {
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-white shadow-accent">
               <Sparkles size={14} className="animate-pulse" />
             </div>
-            <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent font-semibold">
+            <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent">
               GigFlow Intelligence
             </span>
           </div>
@@ -111,14 +111,14 @@ export function AiInsights({ leads, isLoading }: AiInsightsProps) {
           <div className="mt-4 flex items-start gap-2 text-sm text-foreground bg-accent/5 rounded-xl p-3.5 border border-accent/10">
             <Zap size={16} className="text-accent shrink-0 mt-0.5" />
             <span>
-              <strong className="font-semibold text-accent">Recommendation: </strong> 
+              <strong className="text-accent">Recommendation: </strong> 
               {highlightText}
             </span>
           </div>
         </div>
 
         <div className="shrink-0 flex items-center">
-          <button className="w-full md:w-auto relative group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-accent-secondary text-white font-medium px-6 py-3.5 shadow-accent hover:shadow-accent-lg hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer">
+          <button className="w-full md:w-auto relative group flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-accent-secondary text-white px-6 py-3.5 shadow-accent hover:shadow-accent-lg hover:brightness-110 active:scale-[0.98] transition-all duration-200 cursor-pointer">
             <Lightbulb size={16} />
             <span>{suggestionAction}</span>
           </button>

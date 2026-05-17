@@ -208,7 +208,7 @@ export function LeadProfileView({
                   disabled={isUpdatingStatus}
                   value={lead.status}
                   onChange={(e) => handleStatusChange(e.target.value as any)}
-                  className={`text-xs font-semibold rounded-lg px-2.5 py-1.5 border appearance-none pr-8 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#0052FF] transition-all bg-white ${lead.status === 'New' ? 'text-blue-500 border-blue-200' :
+                  className={`text-xs rounded-lg px-2.5 py-1.5 border appearance-none pr-8 cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#0052FF] transition-all bg-white ${lead.status === 'New' ? 'text-blue-500 border-blue-200' :
                       lead.status === 'Contacted' ? 'text-amber-500 border-amber-200' :
                         lead.status === 'Qualified' ? 'text-emerald-500 border-emerald-200' :
                           'text-rose-500 border-rose-200'
@@ -230,7 +230,7 @@ export function LeadProfileView({
           <div className="flex border-b border-slate-100 mt-6 gap-6">
             <button
               onClick={() => setActiveTab('overview')}
-              className={`pb-2.5 text-xs font-semibold font-mono uppercase tracking-[0.15em] transition-all border-b-2 cursor-pointer flex items-center gap-2 ${activeTab === 'overview'
+              className={`pb-2.5 text-xs font-mono uppercase tracking-[0.15em] transition-all border-b-2 cursor-pointer flex items-center gap-2 ${activeTab === 'overview'
                   ? 'border-[#0052FF] text-[#0052FF]'
                   : 'border-transparent text-slate-400 hover:text-slate-600'
                 }`}
@@ -240,7 +240,7 @@ export function LeadProfileView({
             </button>
             <button
               onClick={() => setActiveTab('activity')}
-              className={`pb-2.5 text-xs font-semibold font-mono uppercase tracking-[0.15em] transition-all border-b-2 cursor-pointer flex items-center gap-2 ${activeTab === 'activity'
+              className={`pb-2.5 text-xs font-mono uppercase tracking-[0.15em] transition-all border-b-2 cursor-pointer flex items-center gap-2 ${activeTab === 'activity'
                   ? 'border-[#0052FF] text-[#0052FF]'
                   : 'border-transparent text-slate-400 hover:text-slate-600'
                 }`}
@@ -265,7 +265,7 @@ export function LeadProfileView({
                     <div className="p-1.5 rounded-lg bg-blue-500/10 text-[#0052FF]">
                       <Sparkles size={16} className="animate-pulse" />
                     </div>
-                    <h3 className="text-xs font-mono uppercase tracking-[0.15em] text-[#0052FF] font-semibold">
+                    <h3 className="text-xs font-mono uppercase tracking-[0.15em] text-[#0052FF]">
                       AI Lead Intelligence
                     </h3>
                   </div>
@@ -305,7 +305,7 @@ export function LeadProfileView({
                     <Compass size={12} className="text-[#0052FF]" />
                     <span>Inbound Channel</span>
                   </div>
-                  <div className="mt-1 text-sm font-semibold text-slate-800">
+                  <div className="mt-1 text-sm text-slate-800">
                     {lead.source}
                   </div>
                 </div>
@@ -315,7 +315,7 @@ export function LeadProfileView({
                     <Calendar size={12} className="text-[#0052FF]" />
                     <span>Acquisition Date</span>
                   </div>
-                  <div className="mt-1 text-xs font-semibold text-slate-800">
+                  <div className="mt-1 text-xs text-slate-800">
                     {new Date(lead.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
                   </div>
                 </div>
@@ -325,7 +325,7 @@ export function LeadProfileView({
               <div className="rounded-xl border border-slate-100 p-4 space-y-3.5 shadow-sm hover:shadow-md transition-all duration-200 bg-white">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#0052FF]/20 bg-[#0052FF]/5 px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#0052FF] animate-pulse" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#0052FF] font-semibold">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#0052FF]">
                     Prospect Metadata
                   </span>
                 </div>
@@ -354,7 +354,7 @@ export function LeadProfileView({
               <form onSubmit={handleAddNote} className="space-y-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#0052FF]/20 bg-[#0052FF]/5 px-3 py-1">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#0052FF] animate-pulse" />
-                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#0052FF] font-semibold">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#0052FF]">
                     Create CRM Note
                   </span>
                 </div>
@@ -405,7 +405,7 @@ export function LeadProfileView({
         <div className="shrink-0 border-t border-slate-200/80 p-6 bg-slate-50/50 flex items-center justify-between gap-3">
           <a
             href={`mailto:${lead.email}?subject=${encodeURIComponent("GigFlow Partner Integration")}`}
-            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#0052FF] to-[#4D7CFF] text-white text-xs font-semibold py-3 hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-accent-lg cursor-pointer"
+            className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#0052FF] to-[#4D7CFF] text-white text-xs py-3 hover:brightness-110 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-md shadow-blue-500/10 hover:shadow-accent-lg cursor-pointer"
           >
             <Mail size={14} />
             <span>Send Email</span>

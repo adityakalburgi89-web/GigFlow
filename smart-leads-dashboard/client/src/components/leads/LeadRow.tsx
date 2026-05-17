@@ -34,7 +34,7 @@ export function LeadRow({ lead, onEdit, onDelete, onViewProfile }: LeadRowProps)
       onClick={() => onViewProfile(lead)}
       className="table-row-hover border-b border-border last:border-b-0 cursor-pointer hover:bg-slate-50/60 dark:hover:bg-slate-900/30 transition-colors"
     >
-      <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-foreground">
+      <td className="whitespace-nowrap px-5 py-4 text-sm text-foreground">
         {lead.name}
       </td>
       <td className="whitespace-nowrap px-5 py-4 text-sm text-muted-foreground">

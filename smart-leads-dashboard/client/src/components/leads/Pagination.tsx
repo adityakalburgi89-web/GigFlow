@@ -27,12 +27,12 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
   };
 
   const navBtnClass =
-    "inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40";
+    "inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm text-muted-foreground transition-all duration-200 hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40";
 
   return (
     <div className="flex items-center justify-between px-2 py-3">
       <p className="text-sm text-muted-foreground">
-        Showing <span className="font-medium text-foreground">{start}–{end}</span> of <span className="font-medium text-foreground">{total}</span> leads
+        Showing <span className="text-foreground">{start}–{end}</span> of <span className="text-foreground">{total}</span> leads
       </p>
       <div className="flex items-center gap-1">
         <button
@@ -51,7 +51,7 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
               key={p}
               onClick={() => onPageChange(p)}
               className={cn(
-                "h-10 w-10 rounded-xl text-sm font-medium transition-all duration-200",
+                "h-10 w-10 rounded-xl text-sm transition-all duration-200",
                 p === page
                   ? "bg-gradient-to-r from-accent to-accent-secondary text-white shadow-accent"
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"

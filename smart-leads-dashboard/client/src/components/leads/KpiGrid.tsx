@@ -54,7 +54,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
       {/* Total Leads Card */}
       <Card className="p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-muted-foreground font-mono uppercase tracking-wider">Total Leads</span>
+          <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Total Leads</span>
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent to-accent-secondary text-white shadow-accent">
             <Users size={18} />
           </div>
@@ -62,7 +62,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
         <div className="mt-4">
           <h3 className="text-3xl tracking-tight text-foreground">{totalLeads}</h3>
           <p className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
-            <span className="text-emerald-500 font-semibold flex items-center">
+            <span className="text-emerald-500 flex items-center">
               +12% <ArrowUpRight size={12} />
             </span>
             vs last month
@@ -73,7 +73,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
       {/* Conversion Rate Card */}
       <Card className="p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-muted-foreground font-mono uppercase tracking-wider">Conversion Rate</span>
+          <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Conversion Rate</span>
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent border border-accent/20">
             <Target size={18} />
           </div>
@@ -95,7 +95,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
       {/* Active Inbound Card */}
       <Card className="p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-muted-foreground font-mono uppercase tracking-wider">Active Inbound</span>
+          <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Active Inbound</span>
           <div className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
@@ -113,7 +113,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
       {/* Top acquisition channel */}
       <Card className="p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-muted-foreground font-mono uppercase tracking-wider">Top Source</span>
+          <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">Top Source</span>
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent border border-accent/20">
             <Compass size={18} />
           </div>
@@ -122,7 +122,7 @@ export function KpiGrid({ leads, isLoading }: KpiGridProps) {
           <h3 className="text-3xl tracking-tight text-foreground">{topSource}</h3>
           <div className="mt-2.5 flex items-center justify-between text-xs text-muted-foreground">
             <span>Volume share</span>
-            <span className="font-semibold text-foreground">{topSourcePct}%</span>
+            <span className="text-foreground">{topSourcePct}%</span>
           </div>
           <div className="mt-1.5 h-1.5 w-full rounded-full bg-muted overflow-hidden">
             <div 

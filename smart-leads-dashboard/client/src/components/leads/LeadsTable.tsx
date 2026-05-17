@@ -34,7 +34,7 @@ export function LeadsTable({ leads, isLoading, onEdit, onDelete, onViewProfile }
       <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-border bg-muted/50 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <tr className="border-b border-border bg-muted/50 text-left text-xs uppercase tracking-wider text-muted-foreground">
               {headerCells.map((h) => (
                 <th key={h} className="px-5 py-3.5 font-mono tracking-[0.1em]">{h}</th>
               ))}
@@ -54,7 +54,7 @@ export function LeadsTable({ leads, isLoading, onEdit, onDelete, onViewProfile }
         <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-muted">
           <Inbox className="h-8 w-8 text-muted-foreground" />
         </div>
-        <p className="text-base font-semibold text-foreground">No leads yet</p>
+        <p className="text-base text-foreground">No leads yet</p>
         <p className="mt-1.5 text-sm text-muted-foreground">Get started by creating your first lead.</p>
       </div>
     );
@@ -64,7 +64,7 @@ export function LeadsTable({ leads, isLoading, onEdit, onDelete, onViewProfile }
     <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-sm">
       <table className="w-full">
         <thead>
-          <tr className="border-b border-border bg-muted/50 text-left text-xs font-semibold uppercase text-muted-foreground">
+          <tr className="border-b border-border bg-muted/50 text-left text-xs uppercase text-muted-foreground">
             {headerCells.map((h) => (
               <th key={h} className="px-5 py-3.5 font-mono tracking-[0.1em]">{h}</th>
             ))}
