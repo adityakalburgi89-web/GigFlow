@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, BarChart3, Users, Star, Quote, Menu, X } from "lucide-react";
+import { ArrowRight, Zap, BarChart3, Users, Star, Quote, Menu, X, TrendingUp, CheckCircle2, Globe, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/Button";
-import { Card, CardDescription, CardHeader, CardTitle, CardFooter } from "../components/ui/Card";
+import { Card, CardDescription, CardHeader, CardTitle, CardFooter, CardContent } from "../components/ui/Card";
 import { SectionLabel } from "../components/ui/SectionLabel";
 import { Input } from "../components/ui/Input";
 import { Link } from "react-router-dom";
@@ -12,6 +12,11 @@ const easeOut = [0.16, 1, 0.3, 1] as const;
 const fadeInUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: easeOut } }
+};
+
+const fadeIn = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.7, ease: easeOut } }
 };
 
 const stagger = {
@@ -125,10 +130,13 @@ function Header() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-28 pb-24 md:py-32 lg:py-44">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,82,255,0.08)_0%,transparent_50%)] pointer-events-none" />
-      <div className="container mx-auto px-6 max-w-6xl relative">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
+    <section className="relative overflow-hidden pt-32 pb-24 md:py-36 lg:py-44 min-h-[90vh] flex items-center">
+      {/* Dynamic ambient background glows */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,82,255,0.06)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute bottom-10 left-[-100px] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(77,124,255,0.04)_0%,transparent_75%)] pointer-events-none" />
+      
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-8 items-center">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -141,10 +149,10 @@ function HeroSection() {
             
             <motion.h1 
               variants={fadeInUp}
-              className="mt-6 text-[2.75rem] md:text-6xl lg:text-[5.25rem] font-serif leading-[1.05] tracking-[-0.02em] text-foreground"
+              className="mt-6 text-[2.75rem] md:text-6xl lg:text-[5rem] font-serif leading-[1.05] tracking-[-0.02em] text-foreground"
             >
               Turn Data Into <br className="hidden md:block" />
-              <span className="relative inline-block">
+              <span className="relative inline-block mt-2">
                 <span className="gradient-text">Revenue</span>
                 <span className="gradient-underline" />
               </span>
@@ -152,9 +160,9 @@ function HeroSection() {
             
             <motion.p 
               variants={fadeInUp}
-              className="mt-8 text-lg md:text-xl text-muted-foreground leading-[1.75] max-w-2xl"
+              className="mt-8 text-lg md:text-xl text-muted-foreground leading-[1.75] max-w-xl"
             >
-              The most powerful, AI-driven platform for managing leads, tracking metrics, and scaling your business with minimal effort.
+              The most powerful, AI-driven platform for managing leads, tracking key growth metrics, and scaling your revenue pipeline with minimal effort.
             </motion.p>
             
             <motion.div variants={fadeInUp} className="mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
@@ -170,29 +178,142 @@ function HeroSection() {
             </motion.div>
           </motion.div>
           
+          {/* High-Fidelity Animated Mock-Up */}
           <div className="hidden lg:block relative h-[600px] w-full">
+            {/* Spinning decorative orbit ring */}
             <motion.div 
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border-2 border-dashed border-accent/20"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border border-dashed border-accent/15 pointer-events-none"
               animate={{ rotate: 360 }}
-              transition={{ duration: 60, ease: "linear", repeat: Infinity }}
+              transition={{ duration: 65, ease: "linear", repeat: Infinity }}
             />
             <motion.div 
-              className="absolute top-[20%] left-[10%] w-[250px] h-[300px] rounded-2xl bg-gradient-to-br from-accent to-accent-secondary p-1 shadow-accent-lg"
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 5, ease: "easeInOut", repeat: Infinity }}
-            >
-              <div className="w-full h-full rounded-[14px] bg-card opacity-90 backdrop-blur" />
-            </motion.div>
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-accent/5 pointer-events-none"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 50, ease: "linear", repeat: Infinity }}
+            />
+
+            {/* Decorative dot grid background */}
+            <div className="absolute top-[20%] left-[25%] opacity-15 grid grid-cols-4 gap-4 pointer-events-none">
+              {[...Array(16)].map((_, i) => (
+                <div key={i} className="h-1.5 w-1.5 rounded-full bg-accent" />
+              ))}
+            </div>
+
+            {/* CARD 1: Main Analytics Graph Card */}
             <motion.div 
-              className="absolute bottom-[20%] right-[10%] w-[280px] h-[200px] rounded-2xl bg-white border border-border shadow-xl p-6"
-              animate={{ y: [0, 15, 0] }}
-              transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, delay: 1 }}
+              className="absolute top-[12%] left-[5%] w-[380px] rounded-2xl border border-border/80 bg-card/90 shadow-2xl p-6 backdrop-blur"
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 5.5, ease: "easeInOut", repeat: Infinity }}
             >
-              <div className="w-12 h-12 rounded-full bg-accent/10 mb-4 flex items-center justify-center">
-                <BarChart3 className="text-accent" />
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Total Revenue</p>
+                  <h3 className="text-2xl font-sans font-bold tracking-tight text-foreground mt-0.5">$48,250.00</h3>
+                </div>
+                <div className="flex items-center gap-1 bg-green-500/10 text-green-600 px-2 py-0.5 rounded-full text-xs font-medium">
+                  <TrendingUp size={12} />
+                  +14.2%
+                </div>
               </div>
-              <div className="h-4 w-3/4 bg-muted rounded mb-2" />
-              <div className="h-4 w-1/2 bg-muted rounded" />
+              
+              {/* Mini visual SVG line graph */}
+              <div className="h-28 w-full mt-4">
+                <svg className="w-full h-full" viewBox="0 0 100 35" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#0052FF" stopOpacity="0.25" />
+                      <stop offset="100%" stopColor="#0052FF" stopOpacity="0.0" />
+                    </linearGradient>
+                  </defs>
+                  <path 
+                    d="M0 30 Q15 28 30 18 T60 10 T90 5 L100 2 L100 35 L0 35 Z" 
+                    fill="url(#chartGrad)" 
+                  />
+                  <path 
+                    d="M0 30 Q15 28 30 18 T60 10 T90 5 L100 2" 
+                    fill="none" 
+                    stroke="url(#accentGrad)" 
+                    strokeWidth="2.2" 
+                    strokeLinecap="round"
+                  />
+                  <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stopColor="#0052FF" />
+                    <stop offset="100%" stopColor="#4D7CFF" />
+                  </linearGradient>
+                  {/* Pulsing indicator node */}
+                  <motion.circle 
+                    cx="90" 
+                    cy="5" 
+                    r="3" 
+                    fill="#0052FF"
+                    animate={{ r: [3, 5, 3] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  />
+                  <circle cx="90" cy="5" r="1.5" fill="#FFFFFF" />
+                </svg>
+              </div>
+
+              <div className="flex items-center justify-between border-t border-border/60 pt-4 mt-2 text-xs text-muted-foreground font-medium">
+                <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-accent" />Active Analytics</span>
+                <span>Updated just now</span>
+              </div>
+            </motion.div>
+
+            {/* CARD 2: Floating Activity Feed Card */}
+            <motion.div 
+              className="absolute bottom-[10%] right-[2%] w-[290px] rounded-2xl border border-border/80 bg-white shadow-xl p-5"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 4.5, ease: "easeInOut", repeat: Infinity, delay: 0.8 }}
+            >
+              <div className="flex items-center justify-between mb-3.5">
+                <span className="text-xs font-mono uppercase tracking-wider text-muted-foreground">Live Activity</span>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+              </div>
+              
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 border-b border-muted pb-2.5">
+                  <div className="h-8 w-8 rounded-full bg-accent/10 flex items-center justify-center font-bold text-xs text-accent">SC</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-foreground truncate">Sarah Connor</p>
+                    <p className="text-[10px] text-muted-foreground">Source: LinkedIn</p>
+                  </div>
+                  <span className="text-[9px] bg-green-500/10 text-green-600 px-1.5 py-0.5 rounded font-mono uppercase">Hot</span>
+                </div>
+                <div className="flex items-center gap-3 border-b border-muted pb-2.5">
+                  <div className="h-8 w-8 rounded-full bg-emerald-500/10 flex items-center justify-center font-bold text-xs text-emerald-600">JB</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-foreground truncate">James Bond</p>
+                    <p className="text-[10px] text-muted-foreground">Source: Google</p>
+                  </div>
+                  <span className="text-[9px] bg-accent/10 text-accent px-1.5 py-0.5 rounded font-mono uppercase">New</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="h-8 w-8 rounded-full bg-amber-500/10 flex items-center justify-center font-bold text-xs text-amber-600">BW</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-foreground truncate">Bruce Wayne</p>
+                    <p className="text-[10px] text-muted-foreground">Source: Referral</p>
+                  </div>
+                  <span className="text-[9px] bg-indigo-500/10 text-indigo-600 px-1.5 py-0.5 rounded font-mono uppercase">Demo</span>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* CARD 3: Performance Score Badge */}
+            <motion.div 
+              className="absolute top-[52%] left-[-4%] w-[160px] rounded-2xl bg-gradient-to-br from-accent to-accent-secondary p-[1px] shadow-lg"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 4.0, ease: "easeInOut", repeat: Infinity, delay: 0.3 }}
+            >
+              <div className="bg-slate-900 rounded-[15px] p-4 text-center">
+                <p className="text-[10px] font-mono uppercase tracking-wider text-slate-400">Conversion Rate</p>
+                <h4 className="text-2xl font-sans font-bold tracking-tight text-white mt-1">82.4%</h4>
+                <div className="h-1.5 w-full bg-slate-800 rounded-full mt-2.5 overflow-hidden">
+                  <div className="h-full w-[82%] bg-gradient-to-r from-accent to-accent-secondary rounded-full" />
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -203,15 +324,21 @@ function HeroSection() {
 
 function StatsSection() {
   return (
-    <section className="relative bg-foreground text-background py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)]" style={{ backgroundSize: '32px 32px' }} />
+    <section className="relative bg-slate-950 border-y border-white/5 py-24 md:py-28 overflow-hidden">
+      {/* dot pattern overlay */}
+      <div className="absolute inset-0 dot-pattern" />
+      
+      {/* Accent corner ambient glows */}
+      <div className="absolute -top-[200px] -left-[200px] w-[450px] h-[450px] bg-accent/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-[200px] -right-[200px] w-[450px] h-[450px] bg-accent-secondary/10 rounded-full blur-[100px] pointer-events-none" />
+
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6 divide-x-0 lg:divide-x divide-white/10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {[
-            { value: "99%", label: "Accuracy" },
+            { value: "99%", label: "Accuracy Rate" },
             { value: "2.4x", label: "Revenue Growth" },
             { value: "10k+", label: "Active Users" },
-            { value: "< 1s", label: "Query Time" },
+            { value: "< 1s", label: "Response Time" },
           ].map((stat, idx) => (
             <motion.div 
               key={idx}
@@ -219,10 +346,17 @@ function StatsSection() {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeInUp}
-              className="flex flex-col items-center text-center lg:px-6"
+              className="flex flex-col items-center text-center lg:px-6 relative group"
             >
-              <span className="text-4xl md:text-5xl font-serif text-white">{stat.value}</span>
-              <span className="text-sm md:text-base text-muted-foreground mt-2 font-mono uppercase tracking-widest">{stat.label}</span>
+              {/* Vertical divider line for desktop */}
+              {idx > 0 && (
+                <div className="hidden lg:block absolute left-[-1.5rem] top-1/2 -translate-y-1/2 h-12 w-[1px] bg-white/10" />
+              )}
+              {/* Stat number in modern high-tech sans-serif/monospace instead of serif */}
+              <span className="text-4xl md:text-5.5xl font-sans font-extrabold text-white tracking-tight bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent group-hover:to-accent transition-colors duration-300">
+                {stat.value}
+              </span>
+              <span className="text-xs md:text-sm text-slate-400 mt-3 font-mono uppercase tracking-[0.18em]">{stat.label}</span>
             </motion.div>
           ))}
         </div>
@@ -233,44 +367,74 @@ function StatsSection() {
 
 function FeaturesSection() {
   return (
-    <section id="features" className="py-28 md:py-32 lg:py-44 relative scroll-mt-20">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+    <section id="features" className="py-28 md:py-32 lg:py-40 relative scroll-mt-20 bg-background">
+      {/* Decorative ambient lighting circle */}
+      <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(0,82,255,0.03)_0%,transparent_70%)] rounded-full pointer-events-none" />
+      
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        <div className="flex flex-col items-center text-center mb-20">
-          <SectionLabel>Powerful Features</SectionLabel>
-          <h2 className="mt-6 text-3xl md:text-5xl font-serif text-foreground max-w-2xl">
+        <div className="flex flex-col items-center text-center mb-24">
+          <SectionLabel pulsing>Powerful Features</SectionLabel>
+          <h2 className="mt-6 text-3.5xl md:text-5xl font-serif text-foreground max-w-2xl">
             Everything you need to <span className="gradient-text">scale</span>
           </h2>
+          <p className="mt-4 text-base text-muted-foreground max-w-md">
+            Streamlined revenue infrastructure designed to automate leads tracking and intelligence.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {[
             {
               title: "Lightning Fast",
-              desc: "Built on modern edge infrastructure to ensure your queries return in milliseconds.",
+              desc: "Built on high-performance edge infrastructure to ensure dashboard metrics load in milliseconds.",
               icon: Zap,
               featured: true
             },
             {
               title: "AI Insights",
-              desc: "Let our machine learning models uncover hidden patterns in your sales data.",
+              desc: "Let our predictive model discover hidden pipeline revenue and recommend optimal next actions.",
               icon: BarChart3
             },
             {
-              title: "Team Collaboration",
-              desc: "Work seamlessly with your entire revenue team in real-time.",
+              title: "Team Sync",
+              desc: "Enable real-time collaboration with your team in a sleek workspace featuring status updates.",
               icon: Users
             }
           ].map((feat, idx) => (
-            <Card key={idx} featured={feat.featured} className="group">
-              <CardHeader>
-                <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center text-white mb-4 shadow-accent">
-                  <feat.icon size={28} />
-                </div>
-                <CardTitle>{feat.title}</CardTitle>
-                <CardDescription className="mt-2">{feat.desc}</CardDescription>
-              </CardHeader>
-            </Card>
+            <motion.div
+              key={idx}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={fadeInUp}
+              className="flex"
+            >
+              {/* Every card has premium design. Highlighted card has gradient border, other cards have glass hover lifting */}
+              <Card 
+                featured={feat.featured} 
+                className="group relative overflow-hidden flex flex-col justify-between w-full border-border/80 hover:-translate-y-1.5 transition-all duration-300"
+              >
+                {/* Background overlay glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                
+                <CardHeader className="p-8 pb-4">
+                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center text-white mb-6 shadow-accent transition-transform duration-300 group-hover:scale-105">
+                    <feat.icon size={26} />
+                  </div>
+                  <CardTitle className="font-sans text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent duration-200">
+                    {feat.title}
+                  </CardTitle>
+                  <CardDescription className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                    {feat.desc}
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter className="px-8 pb-8 pt-0">
+                  <span className="text-xs font-semibold text-accent inline-flex items-center gap-1 hover:underline cursor-pointer">
+                    Learn more <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  </span>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -280,30 +444,46 @@ function FeaturesSection() {
 
 function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-28 md:py-32 lg:py-44 bg-muted/30 scroll-mt-20">
+    <section id="how-it-works" className="py-28 md:py-32 lg:py-40 bg-muted/40 border-y border-border/50 scroll-mt-20">
       <div className="container mx-auto px-6 max-w-6xl">
-        <div className="text-center mb-20">
-          <SectionLabel>How It Works</SectionLabel>
-          <h2 className="mt-6 text-3xl md:text-5xl font-serif text-foreground">
+        <div className="text-center mb-24">
+          <SectionLabel pulsing={false}>How It Works</SectionLabel>
+          <h2 className="mt-6 text-3.5xl md:text-5xl font-serif text-foreground">
             Three steps to <span className="gradient-text">success</span>
           </h2>
+          <p className="mt-4 text-base text-muted-foreground max-w-md mx-auto">
+            From setup to analytical breakthroughs in just a few minutes.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-          <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-[2px] bg-border z-0" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 relative">
+          {/* Dashboard Timeline step connectors with sleek gradient line */}
+          <div className="hidden md:block absolute top-[44px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-accent/20 via-accent-secondary/30 to-accent/20 z-0 pointer-events-none" />
           
           {[
-            { step: "01", title: "Connect Data", desc: "Integrate your existing CRMs and data sources in one click." },
-            { step: "02", title: "AI Analysis", desc: "Our engine automatically cleans and analyzes your leads." },
-            { step: "03", title: "Close Deals", desc: "Actionable insights delivered straight to your team." }
+            { step: "01", title: "Connect Data", desc: "Integrate your existing leads channels, ads, or forms in a single click." },
+            { step: "02", title: "AI Analysis", desc: "Our engine automatically deduplicates, validates, and ranks your pipeline." },
+            { step: "03", title: "Close Deals", desc: "Take action on smart suggestions and watch your conversion metrics surge." }
           ].map((item, idx) => (
-            <div key={idx} className="relative z-10 flex flex-col items-center text-center">
-              <div className="w-24 h-24 rounded-full bg-card border-2 border-border shadow-md flex items-center justify-center text-3xl font-serif text-accent mb-6">
+            <motion.div 
+              key={idx}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={fadeInUp}
+              className="relative z-10 flex flex-col items-center text-center group"
+            >
+              {/* Step indicator circle with hover pulse */}
+              <div className="w-22 h-22 rounded-full bg-card border-2 border-border/80 shadow-sm flex items-center justify-center text-2xl font-serif text-accent mb-6 group-hover:border-accent group-hover:shadow-accent transition-all duration-300">
                 {item.step}
               </div>
-              <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
-              <p className="text-muted-foreground">{item.desc}</p>
-            </div>
+              <h3 className="text-xl font-bold font-sans tracking-tight mb-3 text-foreground group-hover:text-accent transition-colors duration-200">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed px-2">
+                {item.desc}
+              </p>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -313,39 +493,61 @@ function HowItWorksSection() {
 
 function TestimonialsSection() {
   return (
-    <section id="testimonials" className="py-28 md:py-32 lg:py-44 relative scroll-mt-20">
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+    <section id="testimonials" className="py-28 md:py-32 lg:py-40 relative scroll-mt-20 bg-background overflow-hidden">
+      {/* Atmospheric lighting glow at bottom */}
+      <div className="absolute bottom-[-150px] left-[-150px] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,82,255,0.03)_0%,transparent_70%)] rounded-full pointer-events-none" />
+      
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
-        <div className="flex flex-col items-center text-center mb-20">
-          <SectionLabel>Testimonials</SectionLabel>
-          <h2 className="mt-6 text-3xl md:text-5xl font-serif text-foreground">
+        <div className="flex flex-col items-center text-center mb-24">
+          <SectionLabel pulsing>Testimonials</SectionLabel>
+          <h2 className="mt-6 text-3.5xl md:text-5xl font-serif text-foreground">
             Loved by <span className="gradient-text">founders</span>
           </h2>
+          <p className="mt-4 text-base text-muted-foreground max-w-md">
+            Here is what modern businesses say about the GigFlow dashboard experience.
+          </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        {/* Testimonial cards grid. CENTER card is vertically offset on desktop. Card has "relative" to lock the absolute Quote mark! */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 items-stretch pb-12">
           {[
             { quote: "It completely transformed how we view our sales pipeline. Absolute game changer.", name: "Sarah J.", role: "VP Sales" },
             { quote: "The AI insights found revenue we didn't even know we were missing. Easy to setup too.", name: "Mike T.", role: "Founder", offset: true },
             { quote: "Finally, a dashboard that is both beautiful and actually useful for the whole team.", name: "Elena R.", role: "CRO" }
           ].map((test, idx) => (
-            <Card key={idx} className={test.offset ? "md:translate-y-8" : ""}>
-              <CardHeader>
-                <div className="flex text-accent mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
-                </div>
-                <Quote className="text-muted-foreground/20 h-12 w-12 absolute top-6 right-6" />
-                <CardDescription className="text-lg text-foreground italic relative z-10">
-                  "{test.quote}"
-                </CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <div>
-                  <p className="font-semibold">{test.name}</p>
-                  <p className="text-sm text-muted-foreground">{test.role}</p>
-                </div>
-              </CardFooter>
-            </Card>
+            <motion.div
+              key={idx}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={fadeInUp}
+              className={`flex ${test.offset ? "md:translate-y-8" : ""}`}
+            >
+              {/* NOTE: Card must have relative style to prevent the absolute Quote icon from escaping! */}
+              <Card className="relative overflow-hidden flex flex-col justify-between w-full border-border/80 p-8 shadow-md hover:shadow-xl transition-all duration-300">
+                <CardHeader className="p-0 pb-6 relative z-10">
+                  {/* Premium gold stars instead of flat blue stars */}
+                  <div className="flex text-amber-400 gap-0.5 mb-5">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={15} fill="currentColor" />)}
+                  </div>
+                  {/* Absolute quote icon pinned perfectly inside the relative card */}
+                  <Quote className="text-accent/5 h-16 w-16 absolute top-[-10px] right-[-10px] pointer-events-none rotate-180" />
+                  
+                  <CardDescription className="text-base text-foreground/90 font-medium italic leading-relaxed pt-2">
+                    "{test.quote}"
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter className="p-0 pt-6 border-t border-border/55 flex items-center justify-between">
+                  <div>
+                    <p className="font-sans font-bold text-sm text-foreground">{test.name}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{test.role}</p>
+                  </div>
+                  <div className="h-8 w-8 rounded-full bg-accent/5 border border-accent/20 flex items-center justify-center text-xs font-bold text-accent">
+                    {test.name.charAt(0)}
+                  </div>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -354,29 +556,54 @@ function TestimonialsSection() {
 }
 
 function FinalCTA() {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      alert(`Thank you! Free trial details sent to: ${email}`);
+      setEmail("");
+    }
+  };
+
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-24 md:py-28 relative overflow-hidden bg-background">
       <div className="container mx-auto px-6 max-w-5xl">
-        <div className="bg-foreground rounded-[3rem] p-10 md:p-16 lg:p-20 text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,82,255,0.2)_0%,transparent_60%)]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05)_1px,transparent_1px)]" style={{ backgroundSize: '24px 24px' }} />
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={fadeInUp}
+          className="bg-slate-950 rounded-[2.5rem] p-10 md:p-16 lg:p-20 text-center relative overflow-hidden shadow-2xl border border-white/5"
+        >
+          {/* Interactive texture layers */}
+          <div className="absolute inset-0 dot-pattern pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,82,255,0.25)_0%,transparent_60%)] pointer-events-none" />
           
           <div className="relative z-10 flex flex-col items-center">
-            <h2 className="text-3xl md:text-5xl font-serif text-white mb-6">
-              Ready to upgrade your workflow?
+            <SectionLabel className="border-white/20 bg-white/5 text-white/90 mb-6">Elevate Your Workflow</SectionLabel>
+            <h2 className="text-3.5xl md:text-5xl font-serif text-white mb-6 leading-tight max-w-2xl">
+              Ready to upgrade your revenue pipeline?
             </h2>
-            <p className="text-lg text-slate-300 mb-10 max-w-xl">
-              Join thousands of teams who are already closing more deals with GigFlow Dashboard.
+            <p className="text-base md:text-lg text-slate-300 mb-10 max-w-lg leading-relaxed">
+              Join thousands of teams who are already building intelligence, tracking leads, and closing deals with GigFlow Dashboard.
             </p>
             
-            <div className="flex flex-col sm:flex-row w-full max-w-md gap-4">
-              <Input placeholder="Enter your email" className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-white" />
-              <Button size="lg" className="w-full sm:w-auto shrink-0 shadow-accent">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row w-full max-w-md gap-3 bg-white/5 p-1.5 rounded-2xl border border-white/10 backdrop-blur-sm">
+              <input 
+                type="email" 
+                placeholder="Enter your work email" 
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-transparent border-0 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-0" 
+              />
+              <Button type="submit" size="lg" className="w-full sm:w-auto shrink-0 shadow-accent rounded-xl text-sm font-semibold h-11 px-5">
                 Start Free Trial
               </Button>
-            </div>
+            </form>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -397,7 +624,7 @@ function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
               The AI-powered revenue infrastructure built to automate leads management, streamline analytical insights, and unlock business potential.
             </p>
-            <div className="flex gap-4.5 mt-2">
+            <div className="flex gap-4 mt-2">
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-xl transition-all duration-200" aria-label="Twitter">
                 <svg className="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
