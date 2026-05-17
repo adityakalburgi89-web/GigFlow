@@ -658,36 +658,14 @@ function HowItWorksSection() {
                 {/* Step Mini Visual */}
                 <div className="w-full mt-auto pt-4 border-t border-border/40 flex justify-center items-center h-24 relative overflow-hidden select-none pointer-events-none">
                   {idx === 0 && (
-                    <div className="flex gap-2.5 items-center justify-center relative">
-                      {/* Central Inbox Icon */}
+                    <div className="flex items-center justify-center relative">
+                      {/* Central Inbox Icon with gentle pulsing scale animation */}
                       <motion.div 
-                        className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent relative z-10"
-                        whileHover={{ scale: 1.05 }}
+                        className="h-12 w-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent relative z-10"
+                        animate={{ scale: [1, 1.05, 1] }}
+                        transition={{ duration: 3.0, ease: "easeInOut", repeat: Infinity }}
                       >
-                        <Inbox size={18} />
-                      </motion.div>
-                      
-                      {/* Floating Channel Badges */}
-                      <motion.div 
-                        className="absolute -left-12 -top-4 bg-muted/95 border border-border/80 text-[10px] font-semibold text-foreground px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm"
-                        animate={{ y: [0, -4, 0] }}
-                        transition={{ duration: 3.5, ease: "easeInOut", repeat: Infinity }}
-                      >
-                        <Globe size={10} className="text-emerald-500" /> Google
-                      </motion.div>
-                      <motion.div 
-                        className="absolute -right-14 -top-3 bg-muted/95 border border-border/80 text-[10px] font-semibold text-foreground px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm"
-                        animate={{ y: [0, 4, 0] }}
-                        transition={{ duration: 4.0, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
-                      >
-                        <Users size={10} className="text-indigo-500" /> LinkedIn
-                      </motion.div>
-                      <motion.div 
-                        className="absolute -bottom-4 left-2 bg-muted/95 border border-border/80 text-[10px] font-semibold text-foreground px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm"
-                        animate={{ y: [0, -3, 0] }}
-                        transition={{ duration: 3.8, ease: "easeInOut", repeat: Infinity, delay: 1.0 }}
-                      >
-                        <Mail size={10} className="text-amber-500" /> Webhook
+                        <Inbox size={22} />
                       </motion.div>
                     </div>
                   )}
