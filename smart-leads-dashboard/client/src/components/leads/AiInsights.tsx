@@ -1,6 +1,5 @@
 import { Card } from '../ui/Card';
-import { SectionLabel } from '../ui/SectionLabel';
-import { Sparkles, TrendingUp, Lightbulb, Zap } from 'lucide-react';
+import { Sparkles, Lightbulb, Zap } from 'lucide-react';
 import type { Lead } from '../../types';
 import { LeadStatus, LeadSource } from '../../types';
 
@@ -46,7 +45,6 @@ export function AiInsights({ leads, isLoading }: AiInsightsProps) {
   // 4. Determine highest source
   const websiteCount = sourceCounts[LeadSource.Website] || 0;
   const instagramCount = sourceCounts[LeadSource.Instagram] || 0;
-  const referralCount = sourceCounts[LeadSource.Referral] || 0;
 
   // Let's formulate the most valuable smart business recommendation:
   let insightTitle = 'High-Value acquisition insights';

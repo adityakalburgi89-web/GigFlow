@@ -1,6 +1,5 @@
 import { Card } from '../ui/Card';
-import { SectionLabel } from '../ui/SectionLabel';
-import { Users, Target, Activity, Compass, ArrowUpRight } from 'lucide-react';
+import { Users, Target, Compass, ArrowUpRight } from 'lucide-react';
 import type { Lead } from '../../types';
 import { LeadStatus } from '../../types';
 
