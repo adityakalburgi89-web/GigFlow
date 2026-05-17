@@ -11,12 +11,13 @@ import type {
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-if (!VITE_API_URL) {
+// Only enforce the strict check in production
+if (import.meta.env.PROD && !VITE_API_URL) {
   throw new Error('VITE_API_URL environment variable is missing. Check your .env file or build arguments.');
 }
 
 const api = axios.create({
-  baseURL: VITE_API_URL,
+  baseURL: VITE_API_URL || 'http://localhost:5000/api',
 });
 
 api.interceptors.request.use((config) => {
