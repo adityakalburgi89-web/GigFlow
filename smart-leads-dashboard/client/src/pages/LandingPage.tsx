@@ -1,22 +1,18 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, BarChart3, Users, Star, Quote, Menu, X, TrendingUp, CheckCircle2, Globe, Mail } from "lucide-react";
+import { ArrowRight, Zap, BarChart3, Users, Star, Quote, Menu, X, TrendingUp, CheckCircle2, Globe, Mail, Sparkles, Inbox, Bell, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/Button";
-import { Card, CardDescription, CardHeader, CardTitle, CardFooter, CardContent } from "../components/ui/Card";
+import { Card, CardDescription, CardHeader, CardFooter } from "../components/ui/Card";
 import { SectionLabel } from "../components/ui/SectionLabel";
-import { Input } from "../components/ui/Input";
+
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.svg";
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 28 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: easeOut } }
-};
-
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.7, ease: easeOut } }
 };
 
 const stagger = {
@@ -47,7 +43,7 @@ function Header() {
       <div className="container mx-auto px-6 max-w-6xl flex items-center justify-between">
         {/* Brand */}
         <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary shadow-accent transition-transform duration-300 group-hover:scale-105" />
+          <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg transition-transform duration-300 group-hover:scale-105" />
           <span className="font-serif text-xl font-bold text-foreground tracking-tight">GigFlow</span>
         </Link>
 
@@ -366,6 +362,19 @@ function StatsSection() {
 }
 
 function FeaturesSection() {
+  const [loadTime, setLoadTime] = useState(18);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoadTime(prev => {
+        const delta = Math.random() > 0.5 ? 1 : -1;
+        const next = prev + delta;
+        return next < 15 ? 16 : next > 21 ? 20 : next;
+      });
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="features" className="py-28 md:py-32 lg:py-40 relative scroll-mt-20 bg-background">
       {/* Decorative ambient lighting circle */}
@@ -385,20 +394,32 @@ function FeaturesSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {[
             {
-              title: "Lightning Fast",
-              desc: "Built on high-performance edge infrastructure to ensure dashboard metrics load in milliseconds.",
+              title: "Lightning Fast Analytics",
+              desc: "Built on high-performance edge infrastructure to ensure dashboard metrics load in milliseconds. Real-time updates keep your data perfectly synchronized.",
               icon: Zap,
-              featured: true
+              featured: true,
+              spans: "lg:col-span-2 md:col-span-2",
+              visualType: "analytics"
             },
             {
-              title: "AI Insights",
-              desc: "Let our predictive model discover hidden pipeline revenue and recommend optimal next actions.",
-              icon: BarChart3
+              title: "AI Predictive Insights",
+              desc: "Let our advanced intelligence engine discover hidden pipeline revenue and recommend optimal next actions automatically.",
+              icon: BarChart3,
+              spans: "lg:col-span-1 md:col-span-1"
             },
             {
-              title: "Team Sync",
-              desc: "Enable real-time collaboration with your team in a sleek workspace featuring status updates.",
-              icon: Users
+              title: "Seamless Team Sync",
+              desc: "Enable real-time collaboration with your team in a sleek workspace featuring status updates, shared views, and instant lead alerts.",
+              icon: Users,
+              spans: "lg:col-span-1 md:col-span-1"
+            },
+            {
+              title: "Automated Lead Workflows",
+              desc: "Ditch manual tracking. Design sophisticated lead capture pipelines, automated status transitions, and real-time updates with zero coding required.",
+              icon: TrendingUp,
+              featured: true,
+              spans: "lg:col-span-2 md:col-span-2",
+              visualType: "workflows"
             }
           ].map((feat, idx) => (
             <motion.div
@@ -407,32 +428,160 @@ function FeaturesSection() {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeInUp}
-              className="flex"
+              className={`flex ${feat.spans || ""}`}
             >
               {/* Every card has premium design. Highlighted card has gradient border, other cards have glass hover lifting */}
               <Card 
                 featured={feat.featured} 
-                className="group relative overflow-hidden flex flex-col justify-between w-full border-border/80 hover:-translate-y-1.5 transition-all duration-300"
+                className={`${feat.spans || "lg:col-span-1 md:col-span-1"} group relative overflow-hidden flex flex-col w-full border-border/80 hover:-translate-y-1.5 hover:shadow-accent transition-all duration-300`}
               >
                 {/* Background overlay glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                 
-                <CardHeader className="p-8 pb-4">
-                  <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center text-white mb-6 shadow-accent transition-transform duration-300 group-hover:scale-105">
-                    <feat.icon size={26} />
+                <div className={`${feat.featured ? "" : "p-8 sm:p-10"} flex flex-col sm:flex-row items-stretch justify-between gap-6 h-full w-full relative z-10`}>
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent to-accent-secondary flex items-center justify-center text-white mb-6 shadow-accent transition-transform duration-300 group-hover:scale-105">
+                        <feat.icon size={26} />
+                      </div>
+                      <h3 className="font-sans text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent duration-200">
+                        {feat.title}
+                      </h3>
+                      <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+                        {feat.desc}
+                      </p>
+                    </div>
+                    <div className="pt-6">
+                      <span className="text-xs font-semibold text-accent inline-flex items-center gap-1 hover:underline cursor-pointer">
+                        Learn more <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
                   </div>
-                  <CardTitle className="font-sans text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-accent duration-200">
-                    {feat.title}
-                  </CardTitle>
-                  <CardDescription className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    {feat.desc}
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter className="px-8 pb-8 pt-0">
-                  <span className="text-xs font-semibold text-accent inline-flex items-center gap-1 hover:underline cursor-pointer">
-                    Learn more <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
-                  </span>
-                </CardFooter>
+
+                  {feat.visualType === "analytics" && (
+                    <div className="hidden sm:flex flex-col justify-center items-center h-full w-[220px] shrink-0 border-l border-border/50 pl-6 my-auto select-none pointer-events-none">
+                      <div className="w-full bg-slate-900 border border-slate-800 rounded-xl p-3.5 shadow-xl relative overflow-hidden group/chart text-left">
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="text-[9px] font-mono uppercase tracking-wider text-slate-400">Response</span>
+                          <span className="text-[10px] text-accent-secondary font-semibold flex items-center gap-0.5">
+                            <Zap size={10} className="fill-accent-secondary animate-pulse" /> Live
+                          </span>
+                        </div>
+                        
+                        {/* Live Load Time Counter */}
+                        <div className="my-1.5 flex items-baseline gap-1">
+                          <motion.span 
+                            key={loadTime}
+                            initial={{ opacity: 0.7, y: -2 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-2xl font-bold font-sans tracking-tight text-white"
+                          >
+                            {loadTime}
+                          </motion.span>
+                          <span className="text-[10px] font-mono text-slate-500 font-medium">ms</span>
+                        </div>
+
+                        <div className="h-14 w-full mt-2 relative">
+                          <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+                            <path 
+                              d="M0 35 C 10 32, 20 15, 30 18 C 40 22, 50 8, 60 12 C 70 16, 80 4, 100 2 L 100 40 L 0 40 Z" 
+                              fill="url(#featureChartGrad)" 
+                            />
+                            <motion.path 
+                              d="M0 35 C 10 32, 20 15, 30 18 C 40 22, 50 8, 60 12 C 70 16, 80 4, 100 2" 
+                              fill="none" 
+                              stroke="url(#featureChartLineGrad)" 
+                              strokeWidth="2" 
+                              strokeLinecap="round"
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 1.5, ease: "easeOut" }}
+                            />
+                            <defs>
+                              <linearGradient id="featureChartGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stopColor="#0052FF" stopOpacity="0.25" />
+                                <stop offset="100%" stopColor="#0052FF" stopOpacity="0" />
+                              </linearGradient>
+                              <linearGradient id="featureChartLineGrad" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stopColor="#0052FF" />
+                                <stop offset="100%" stopColor="#4D7CFF" />
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                          <motion.circle 
+                            cx="100" 
+                            cy="2" 
+                            r="3.5" 
+                            fill="#4D7CFF"
+                            animate={{ r: [3.5, 5, 3.5] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          />
+                          <circle cx="100" cy="2" r="1.5" fill="#FFFFFF" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {feat.visualType === "workflows" && (
+                    <div className="hidden sm:flex flex-col justify-center items-center h-full w-[220px] shrink-0 border-l border-border/50 pl-6 my-auto select-none pointer-events-none">
+                      <div className="relative flex flex-col gap-2 w-full items-center text-left">
+                        
+                        {/* Node 1: Capture */}
+                        <div className="w-[180px] bg-card border border-border/60 rounded-xl p-2 flex items-center gap-2 shadow-sm relative overflow-hidden">
+                          <div className="h-6.5 w-6.5 rounded bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
+                            <Globe size={13} />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[9px] font-bold text-foreground truncate">Lead Captured</p>
+                            <p className="text-[7px] text-muted-foreground font-mono">LinkedIn API • Just Now</p>
+                          </div>
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping absolute right-2 top-2" />
+                        </div>
+                        
+                        {/* Path 1 -> 2 */}
+                        <div className="h-4 w-[2px] bg-dashed border-l border-dashed border-accent/25 relative">
+                          <motion.div 
+                            className="absolute -left-[3px] h-1.5 w-1.5 rounded-full bg-accent"
+                            animate={{ y: [0, 16, 0] }}
+                            transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
+                          />
+                        </div>
+
+                        {/* Node 2: AI Scoring */}
+                        <div className="w-[180px] bg-card border border-border/60 rounded-xl p-2 flex items-center gap-2 shadow-sm relative overflow-hidden">
+                          <div className="h-6.5 w-6.5 rounded bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+                            <Sparkles size={13} className="animate-pulse" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[9px] font-bold text-foreground truncate">AI Lead Scoring</p>
+                            <p className="text-[7px] text-amber-600 font-semibold font-mono">Match Score: 98%</p>
+                          </div>
+                        </div>
+
+                        {/* Path 2 -> 3 */}
+                        <div className="h-4 w-[2px] bg-dashed border-l border-dashed border-accent/25 relative">
+                          <motion.div 
+                            className="absolute -left-[3px] h-1.5 w-1.5 rounded-full bg-accent-secondary"
+                            animate={{ y: [0, 16, 0] }}
+                            transition={{ duration: 2.2, repeat: Infinity, ease: "linear", delay: 1.1 }}
+                          />
+                        </div>
+
+                        {/* Node 3: Slack Alert */}
+                        <div className="w-[180px] bg-card border border-border/60 rounded-xl p-2 flex items-center gap-2 shadow-sm relative overflow-hidden">
+                          <div className="h-6.5 w-6.5 rounded bg-accent/10 text-accent flex items-center justify-center shrink-0">
+                            <Bell size={13} className="animate-bounce" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[9px] font-bold text-foreground truncate">Slack Alert Sent</p>
+                            <p className="text-[7px] text-muted-foreground font-mono">Instant Notification</p>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  )}
+                </div>
               </Card>
             </motion.div>
           ))}
@@ -444,8 +593,8 @@ function FeaturesSection() {
 
 function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-28 md:py-32 lg:py-40 bg-muted/40 border-y border-border/50 scroll-mt-20">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="how-it-works" className="py-28 md:py-32 lg:py-40 bg-muted/40 border-y border-border/50 scroll-mt-20 relative">
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="text-center mb-24">
           <SectionLabel pulsing={false}>How It Works</SectionLabel>
           <h2 className="mt-6 text-3.5xl md:text-5xl font-serif text-foreground">
@@ -458,12 +607,24 @@ function HowItWorksSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 relative">
           {/* Dashboard Timeline step connectors with sleek gradient line */}
-          <div className="hidden md:block absolute top-[44px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-accent/20 via-accent-secondary/30 to-accent/20 z-0 pointer-events-none" />
+          <div className="hidden md:block absolute top-[68px] left-[15%] right-[15%] h-[2px] bg-gradient-to-r from-accent/20 via-accent-secondary/30 to-accent/20 z-0 pointer-events-none" />
+          
+          {/* Desktop Arrow Connectors */}
+          <div className="hidden md:block absolute top-[68px] left-[33%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none">
+            <div className="h-8 w-8 rounded-full bg-card border border-accent/25 text-accent flex items-center justify-center shadow-sm">
+              <ArrowRight size={14} />
+            </div>
+          </div>
+          <div className="hidden md:block absolute top-[68px] left-[66%] -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none select-none">
+            <div className="h-8 w-8 rounded-full bg-card border border-accent/25 text-accent flex items-center justify-center shadow-sm">
+              <ArrowRight size={14} />
+            </div>
+          </div>
           
           {[
-            { step: "01", title: "Connect Data", desc: "Integrate your existing leads channels, ads, or forms in a single click." },
-            { step: "02", title: "AI Analysis", desc: "Our engine automatically deduplicates, validates, and ranks your pipeline." },
-            { step: "03", title: "Close Deals", desc: "Take action on smart suggestions and watch your conversion metrics surge." }
+            { step: "01", title: "Connect Channels", desc: "Integrate your existing leads channels, email forms, or ads in a single click." },
+            { step: "02", title: "AI Pipeline Analysis", desc: "Our engine automatically deduplicates, validates, and ranks your pipeline." },
+            { step: "03", title: "Close Strategic Deals", desc: "Take action on smart suggestions and watch your conversion metrics surge." }
           ].map((item, idx) => (
             <motion.div 
               key={idx}
@@ -471,18 +632,121 @@ function HowItWorksSection() {
               whileInView="visible"
               viewport={{ once: true, margin: "-60px" }}
               variants={fadeInUp}
-              className="relative z-10 flex flex-col items-center text-center group"
+              className="relative z-10 flex flex-col items-center group w-full"
             >
-              {/* Step indicator circle with hover pulse */}
-              <div className="w-22 h-22 rounded-full bg-card border-2 border-border/80 shadow-sm flex items-center justify-center text-2xl font-serif text-accent mb-6 group-hover:border-accent group-hover:shadow-accent transition-all duration-300">
-                {item.step}
+              {/* Step card component */}
+              <div className="w-full bg-card border border-border/80 rounded-2xl p-8 shadow-md hover:shadow-accent hover:-translate-y-1.5 transition-all duration-300 relative group flex flex-col items-center text-center overflow-hidden">
+                {/* Large translucent number inside card */}
+                <span className="font-serif text-8xl absolute right-4 bottom-2 text-foreground/5 group-hover:text-accent/10 transition-colors duration-300 select-none pointer-events-none">
+                  {item.step}
+                </span>
+
+                {/* Step indicator circle with hover pulse */}
+                <div className="w-14 h-14 rounded-full bg-accent/5 border border-accent/20 flex items-center justify-center text-lg font-mono text-accent mb-6 group-hover:bg-gradient-to-br group-hover:from-accent group-hover:to-accent-secondary group-hover:text-white transition-all duration-300 shadow-sm relative">
+                  <span className="relative z-10">{item.step}</span>
+                  {/* Subtle pulsing animation ring behind the circle */}
+                  <span className="absolute inset-0 rounded-full bg-accent/10 scale-100 group-hover:scale-125 opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                </div>
+                
+                <h3 className="text-lg font-bold font-sans tracking-tight mb-3 text-foreground group-hover:text-accent transition-colors duration-200">
+                  {item.title}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed px-2 relative z-10 mb-6">
+                  {item.desc}
+                </p>
+
+                {/* Step Mini Visual */}
+                <div className="w-full mt-auto pt-4 border-t border-border/40 flex justify-center items-center h-24 relative overflow-hidden select-none pointer-events-none">
+                  {idx === 0 && (
+                    <div className="flex gap-2.5 items-center justify-center relative">
+                      {/* Central Inbox Icon */}
+                      <motion.div 
+                        className="h-10 w-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent relative z-10"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <Inbox size={18} />
+                      </motion.div>
+                      
+                      {/* Floating Channel Badges */}
+                      <motion.div 
+                        className="absolute -left-12 -top-4 bg-muted/95 border border-border/80 text-[10px] font-semibold text-foreground px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm"
+                        animate={{ y: [0, -4, 0] }}
+                        transition={{ duration: 3.5, ease: "easeInOut", repeat: Infinity }}
+                      >
+                        <Globe size={10} className="text-emerald-500" /> Google
+                      </motion.div>
+                      <motion.div 
+                        className="absolute -right-14 -top-3 bg-muted/95 border border-border/80 text-[10px] font-semibold text-foreground px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm"
+                        animate={{ y: [0, 4, 0] }}
+                        transition={{ duration: 4.0, ease: "easeInOut", repeat: Infinity, delay: 0.5 }}
+                      >
+                        <Users size={10} className="text-indigo-500" /> LinkedIn
+                      </motion.div>
+                      <motion.div 
+                        className="absolute -bottom-4 left-2 bg-muted/95 border border-border/80 text-[10px] font-semibold text-foreground px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm"
+                        animate={{ y: [0, -3, 0] }}
+                        transition={{ duration: 3.8, ease: "easeInOut", repeat: Infinity, delay: 1.0 }}
+                      >
+                        <Mail size={10} className="text-amber-500" /> Webhook
+                      </motion.div>
+                    </div>
+                  )}
+
+                  {idx === 1 && (
+                    <div className="w-full max-w-[180px] bg-muted/40 rounded-xl p-2.5 border border-border/40 text-left relative overflow-hidden">
+                      {/* AI Scan Line Animation */}
+                      <motion.div 
+                        className="absolute left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-accent to-transparent z-10"
+                        animate={{ top: ["4px", "88px", "4px"] }}
+                        transition={{ duration: 3.2, ease: "easeInOut", repeat: Infinity }}
+                      />
+                      
+                      <div className="space-y-1.5 relative z-0">
+                        <div className="flex items-center justify-between text-[8px] font-semibold text-foreground border-b border-border/30 pb-1">
+                          <span>Google Lead</span>
+                          <span className="text-emerald-600 bg-emerald-500/10 px-1 rounded font-mono font-bold">98% Match</span>
+                        </div>
+                        <div className="flex items-center justify-between text-[8px] font-semibold text-foreground border-b border-border/30 pb-1">
+                          <span>Referral Lead</span>
+                          <span className="text-accent bg-accent/10 px-1 rounded font-mono font-bold">89% Match</span>
+                        </div>
+                        <div className="flex items-center justify-between text-[8px] font-semibold text-foreground/50">
+                          <span>Duplicate Sync</span>
+                          <span className="text-slate-400 bg-slate-100 dark:bg-slate-800 px-1 rounded font-mono">Removed</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {idx === 2 && (
+                    <div className="flex flex-col items-center justify-center relative w-full px-4">
+                      {/* Dynamic win counter */}
+                      <motion.div 
+                        className="bg-emerald-500/10 border border-emerald-500/25 rounded-lg px-2.5 py-1 flex items-center gap-1.5 shadow-sm text-emerald-600 font-semibold text-[10px]"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <CheckCircle2 size={12} className="text-emerald-600 shrink-0" />
+                        <span>+$4,500 Win Secured</span>
+                        <motion.span 
+                          className="text-[9px]"
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          🎉
+                        </motion.span>
+                      </motion.div>
+                      
+                      {/* Growth metrics indicator */}
+                      <div className="flex items-center justify-between gap-1 w-full mt-3 px-4">
+                        <span className="text-[9px] font-mono text-muted-foreground uppercase">Pipeline</span>
+                        <span className="text-[10px] text-emerald-600 font-bold font-sans tracking-tight flex items-center">
+                          <TrendingUp size={10} className="mr-0.5" /> +28.4%
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-              <h3 className="text-xl font-bold font-sans tracking-tight mb-3 text-foreground group-hover:text-accent transition-colors duration-200">
-                {item.title}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed px-2">
-                {item.desc}
-              </p>
             </motion.div>
           ))}
         </div>
@@ -495,7 +759,7 @@ function TestimonialsSection() {
   return (
     <section id="testimonials" className="py-28 md:py-32 lg:py-40 relative scroll-mt-20 bg-background overflow-hidden">
       {/* Atmospheric lighting glow at bottom */}
-      <div className="absolute bottom-[-150px] left-[-150px] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,82,255,0.03)_0%,transparent_70%)] rounded-full pointer-events-none" />
+      <div className="absolute bottom-[-150px] left-[-150px] w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(0,82,255,0.04)_0%,transparent_75%)] rounded-full pointer-events-none blur-[100px]" />
       
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <div className="flex flex-col items-center text-center mb-24">
@@ -511,9 +775,25 @@ function TestimonialsSection() {
         {/* Testimonial cards grid. CENTER card is vertically offset on desktop. Card has "relative" to lock the absolute Quote mark! */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 items-stretch pb-12">
           {[
-            { quote: "It completely transformed how we view our sales pipeline. Absolute game changer.", name: "Sarah J.", role: "VP Sales" },
-            { quote: "The AI insights found revenue we didn't even know we were missing. Easy to setup too.", name: "Mike T.", role: "Founder", offset: true },
-            { quote: "Finally, a dashboard that is both beautiful and actually useful for the whole team.", name: "Elena R.", role: "CRO" }
+            { 
+              quote: "It completely transformed how we view our sales pipeline. Absolute game changer.", 
+              name: "Sarah J.", 
+              role: "VP Sales at Hyperion", 
+              avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&h=120&q=80" 
+            },
+            { 
+              quote: "The AI insights found revenue we didn't even know we were missing. Easy to setup too.", 
+              name: "Mike T.", 
+              role: "Founder at SparkFlow", 
+              avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80", 
+              offset: true 
+            },
+            { 
+              quote: "Finally, a dashboard that is both beautiful and actually useful for the whole team.", 
+              name: "Elena R.", 
+              role: "CRO at CloudPulse", 
+              avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80" 
+            }
           ].map((test, idx) => (
             <motion.div
               key={idx}
@@ -524,26 +804,39 @@ function TestimonialsSection() {
               className={`flex ${test.offset ? "md:translate-y-8" : ""}`}
             >
               {/* NOTE: Card must have relative style to prevent the absolute Quote icon from escaping! */}
-              <Card className="relative overflow-hidden flex flex-col justify-between w-full border-border/80 p-8 shadow-md hover:shadow-xl transition-all duration-300">
-                <CardHeader className="p-0 pb-6 relative z-10">
+              <Card className="relative overflow-hidden flex flex-col justify-between w-full border-border/80 p-8 shadow-md hover:shadow-accent hover:-translate-y-1.5 transition-all duration-300 group">
+                {/* testimonial accent bar at the top */}
+                <div className="absolute top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-accent to-accent-secondary opacity-80" />
+                
+                <CardHeader className="p-0 pb-6 relative z-10 text-left">
                   {/* Premium gold stars instead of flat blue stars */}
                   <div className="flex text-amber-400 gap-0.5 mb-5">
                     {[...Array(5)].map((_, i) => <Star key={i} size={15} fill="currentColor" />)}
                   </div>
                   {/* Absolute quote icon pinned perfectly inside the relative card */}
-                  <Quote className="text-accent/5 h-16 w-16 absolute top-[-10px] right-[-10px] pointer-events-none rotate-180" />
+                  <Quote className="text-accent/[0.04] group-hover:text-accent/[0.09] h-[120px] w-[120px] absolute -top-8 -right-8 pointer-events-none rotate-180 transition-all duration-500 scale-100 group-hover:scale-105" />
                   
                   <CardDescription className="text-base text-foreground/90 font-medium italic leading-relaxed pt-2">
                     "{test.quote}"
                   </CardDescription>
                 </CardHeader>
-                <CardFooter className="p-0 pt-6 border-t border-border/55 flex items-center justify-between">
-                  <div>
-                    <p className="font-sans font-bold text-sm text-foreground">{test.name}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">{test.role}</p>
-                  </div>
-                  <div className="h-8 w-8 rounded-full bg-accent/5 border border-accent/20 flex items-center justify-center text-xs font-bold text-accent">
-                    {test.name.charAt(0)}
+                <CardFooter className="p-0 pt-6 border-t border-border/55 flex items-center justify-between relative z-10">
+                  <div className="flex items-center gap-3">
+                    <img 
+                      src={test.avatar} 
+                      alt={test.name} 
+                      className="h-10 w-10 rounded-full object-cover border border-accent/20 shadow-sm"
+                    />
+                    <div className="text-left">
+                      <div className="flex items-center gap-1">
+                        <p className="font-sans font-bold text-sm text-foreground">{test.name}</p>
+                        {/* Verified Customer Badge */}
+                        <div className="h-3.5 w-3.5 rounded-full bg-accent/15 text-accent flex items-center justify-center shrink-0" title="Verified Customer">
+                          <Check size={9} strokeWidth={3} />
+                        </div>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5">{test.role}</p>
+                    </div>
                   </div>
                 </CardFooter>
               </Card>
@@ -618,7 +911,7 @@ function Footer() {
           {/* Brand Info */}
           <div className="md:col-span-2 flex flex-col gap-4">
             <Link to="/" className="flex items-center gap-2.5 group w-fit">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary shadow-accent transition-transform duration-300 group-hover:scale-105" />
+              <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg transition-transform duration-300 group-hover:scale-105" />
               <span className="font-serif text-xl font-bold text-foreground tracking-tight">GigFlow</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">

@@ -5,10 +5,11 @@ import { auth as authApi } from '../services/api';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
 import { Alert } from '../components/ui/Alert';
-import { ArrowRight, Sparkles, CheckCircle2, Star } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import type { ApiResponse, AuthResponse } from '../types';
 import type { AxiosResponse } from 'axios';
 import { motion } from 'framer-motion';
+import logo from '../assets/logo.svg';
 
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
@@ -85,7 +86,7 @@ export default function RegisterPage() {
           
           {/* Logo brand */}
           <Link to="/" className="inline-flex items-center gap-2.5 group">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary shadow-accent transition-transform duration-300 group-hover:scale-105" />
+            <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg transition-transform duration-300 group-hover:scale-105" />
             <span className="font-serif text-xl font-bold text-foreground">GigFlow</span>
           </Link>
 

@@ -4,7 +4,6 @@ import { useAuth } from '../../context/AuthContext';
 import { ExportButton } from './ExportButton';
 import { LeadStatus, LeadSource } from '../../types';
 import type { LeadFilters as LeadFiltersType } from '../../types';
-import { Input } from '../ui/Input';
 import { Select } from '../ui/Select';
 import { Search } from 'lucide-react';
 

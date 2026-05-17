@@ -3,6 +3,7 @@ import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { Sun, Moon, LogOut } from 'lucide-react';
 import { useDarkMode } from '../../hooks/useDarkMode';
+import logo from '../../assets/logo.svg';
 
 export function Navbar() {
   const { user, logout } = useAuth();
@@ -11,7 +12,7 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-border bg-card/80 px-6 backdrop-blur-md">
       <div className="flex items-center gap-2.5">
-        <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary shadow-accent" />
+        <img src={logo} alt="GigFlow Logo" className="h-8 w-8 object-contain rounded-lg" />
         <span className="font-serif text-xl font-bold text-foreground">GigFlow</span>
       </div>
       <div className="flex items-center gap-3">
