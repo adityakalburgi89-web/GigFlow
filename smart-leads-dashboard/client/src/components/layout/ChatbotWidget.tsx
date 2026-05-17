@@ -235,7 +235,7 @@ export default function ChatbotWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 25, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 280 }}
-            className="mb-4 w-[380px] h-[600px] max-h-[85vh] rounded-3xl border border-slate-200/80 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-900 shadow-2xl flex flex-col overflow-hidden"
+            className="mb-4 w-[380px] h-[600px] max-h-[85vh] rounded-3xl border border-slate-200/80 bg-slate-50 shadow-2xl flex flex-col overflow-hidden"
           >
             {/* GRADIENT HEADER */}
             <div className="bg-gradient-to-br from-[#0052FF] to-[#4D7CFF] text-white p-6 relative shrink-0">
@@ -292,25 +292,25 @@ export default function ChatbotWidget() {
                 >
                   {/* SEARCH FAQ INPUT */}
                   <div className="relative">
-                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                     <input
                       type="text"
                       placeholder="Search help articles..."
                       value={searchQuery}
                       onChange={e => setSearchQuery(e.target.value)}
-                      className="w-full bg-white dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl py-3 pl-10 pr-4 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0052FF] focus:border-transparent transition-all shadow-sm"
+                      className="w-full bg-white border border-slate-200/80 rounded-2xl py-3 pl-10 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0052FF] focus:border-transparent transition-all shadow-sm"
                     />
                   </div>
 
                   {searchQuery ? (
                     /* FILTERED FAQ SEARCH RESULTS */
-                    <div className="bg-white dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/60 rounded-2xl p-4 shadow-sm space-y-3">
+                    <div className="bg-white border border-slate-200/60 rounded-2xl p-4 shadow-sm space-y-3">
                       <div className="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Search Results</div>
                       {filteredFaqs.length > 0 ? (
                         filteredFaqs.map((faq, i) => (
-                          <div key={i} className="border-b border-slate-100 dark:border-slate-800/60 last:border-0 pb-3 last:pb-0">
-                            <h4 className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-1">{faq.q}</h4>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{faq.a}</p>
+                          <div key={i} className="border-b border-slate-100 last:border-0 pb-3 last:pb-0">
+                            <h4 className="text-sm font-semibold text-slate-800 mb-1">{faq.q}</h4>
+                            <p className="text-xs text-slate-500 leading-relaxed">{faq.a}</p>
                           </div>
                         ))
                       ) : (
@@ -323,15 +323,15 @@ export default function ChatbotWidget() {
                       {/* CARD 1: ASK A QUESTION */}
                       <div
                         onClick={() => setActiveTab("messages")}
-                        className="bg-white dark:bg-slate-950/80 hover:bg-slate-50 dark:hover:bg-slate-950 border border-slate-100 dark:border-slate-800/80 hover:border-slate-200 dark:hover:border-slate-700 shadow-sm rounded-2xl p-4 cursor-pointer transition-all flex items-center justify-between group"
+                        className="bg-white hover:bg-slate-50 border border-slate-100 hover:border-slate-200 shadow-sm rounded-2xl p-4 cursor-pointer transition-all flex items-center justify-between group"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-[#0052FF] flex items-center justify-center shadow-sm">
+                          <div className="h-10 w-10 rounded-xl bg-blue-50 text-[#0052FF] flex items-center justify-center shadow-sm">
                             <MessageSquare size={18} />
                           </div>
                           <div>
-                            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Ask a question</h3>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">We are here to help you live.</p>
+                            <h3 className="text-sm font-bold text-slate-800">Ask a question</h3>
+                            <p className="text-xs text-slate-500 mt-0.5">We are here to help you live.</p>
                           </div>
                         </div>
                         <ChevronRight size={16} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" />
@@ -340,28 +340,28 @@ export default function ChatbotWidget() {
                       {/* CARD 2: BOOK A CALL */}
                       <div
                         onClick={() => setShowCalendar(true)}
-                        className="bg-white dark:bg-slate-950/80 hover:bg-slate-50 dark:hover:bg-slate-950 border border-slate-100 dark:border-slate-800/80 hover:border-slate-200 dark:hover:border-slate-700 shadow-sm rounded-2xl p-4 cursor-pointer transition-all flex items-center justify-between group"
+                        className="bg-white hover:bg-slate-50 border border-slate-100 hover:border-slate-200 shadow-sm rounded-2xl p-4 cursor-pointer transition-all flex items-center justify-between group"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="h-10 w-10 rounded-xl bg-indigo-50 dark:bg-indigo-900/20 text-indigo-500 flex items-center justify-center shadow-sm">
+                          <div className="h-10 w-10 rounded-xl bg-indigo-50 text-indigo-500 flex items-center justify-center shadow-sm">
                             <Calendar size={18} />
                           </div>
                           <div>
-                            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Book a call</h3>
-                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Walkthrough custom features.</p>
+                            <h3 className="text-sm font-bold text-slate-800">Book a call</h3>
+                            <p className="text-xs text-slate-500 mt-0.5">Walkthrough custom features.</p>
                           </div>
                         </div>
                         <ChevronRight size={16} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                       </div>
 
                       {/* CARD 3: HIGHEST COVERAGE INTEL */}
-                      <div className="bg-white dark:bg-slate-950/80 border border-slate-100 dark:border-slate-800/80 shadow-sm rounded-2xl p-4 flex items-center gap-4">
-                        <div className="h-10 w-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 flex items-center justify-center shrink-0 shadow-sm">
+                      <div className="bg-white border border-slate-100 shadow-sm rounded-2xl p-4 flex items-center gap-4">
+                        <div className="h-10 w-10 rounded-xl bg-emerald-50 text-emerald-500 flex items-center justify-center shrink-0 shadow-sm">
                           <Sparkles size={18} />
                         </div>
                         <div>
-                          <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200">Highest Search Coverage</h3>
-                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Verified mail/phone scraping infrastructure.</p>
+                          <h3 className="text-sm font-bold text-slate-800">Highest Search Coverage</h3>
+                          <p className="text-xs text-slate-500 mt-0.5">Verified mail/phone scraping infrastructure.</p>
                         </div>
                       </div>
 
@@ -372,13 +372,13 @@ export default function ChatbotWidget() {
                           {FAQ_ITEMS.map((faq, i) => (
                             <div
                               key={i}
-                              className="bg-white dark:bg-slate-950/40 border border-slate-100 dark:border-slate-800/60 rounded-xl overflow-hidden shadow-sm"
+                              className="bg-white border border-slate-100 rounded-xl overflow-hidden shadow-sm"
                             >
                               <button
                                 onClick={() => setExpandedFaq(expandedFaq === i ? null : i)}
                                 className="w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none"
                               >
-                                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{faq.q}</span>
+                                <span className="text-xs font-semibold text-slate-700">{faq.q}</span>
                                 <ChevronDown
                                   size={14}
                                   className={`text-slate-400 transition-transform ${expandedFaq === i ? "rotate-180" : ""}`}
@@ -392,7 +392,7 @@ export default function ChatbotWidget() {
                                     exit={{ height: 0 }}
                                     className="overflow-hidden"
                                   >
-                                    <div className="px-4 pb-3 text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-900 pt-2 bg-slate-50/50 dark:bg-slate-950/20">
+                                    <div className="px-4 pb-3 text-xs text-slate-500 leading-relaxed border-t border-slate-50 pt-2 bg-slate-50/50">
                                       {faq.a}
                                     </div>
                                   </motion.div>
@@ -412,7 +412,7 @@ export default function ChatbotWidget() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="h-full flex flex-col bg-white dark:bg-slate-950"
+                  className="h-full flex flex-col bg-white"
                 >
                   {/* MESSAGE HISTORY */}
                   <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0 scrollbar-thin">
@@ -436,9 +436,9 @@ export default function ChatbotWidget() {
                         </div>
 
                         <div
-                          className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm whitespace-pre-line ${msg.sender === "user"
+                           className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed shadow-sm whitespace-pre-line ${msg.sender === "user"
                             ? "bg-[#0052FF] text-white rounded-tr-sm"
-                            : "bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200/30 dark:border-slate-800 rounded-tl-sm"
+                            : "bg-slate-100 text-slate-800 border border-slate-200/30 rounded-tl-sm"
                             }`}
                         >
                           {msg.text}
@@ -455,7 +455,7 @@ export default function ChatbotWidget() {
                           </div>
                           <span className="text-[10px] text-slate-400 font-medium">Giga Bot is typing</span>
                         </div>
-                        <div className="bg-slate-100 dark:bg-slate-900 border border-slate-200/30 dark:border-slate-800 rounded-2xl rounded-tl-sm px-4 py-2.5 flex items-center gap-1">
+                        <div className="bg-slate-100 border border-slate-200/30 rounded-2xl rounded-tl-sm px-4 py-2.5 flex items-center gap-1">
                           <span className="h-2 w-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                           <span className="h-2 w-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                           <span className="h-2 w-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -467,22 +467,22 @@ export default function ChatbotWidget() {
 
                   {/* QUICK REPLIES */}
                   {messages.length === 1 && !isTyping && (
-                    <div className="p-3 bg-slate-50 dark:bg-slate-900/60 border-t border-slate-100 dark:border-slate-900 shrink-0 flex flex-wrap gap-1.5 justify-center">
+                    <div className="p-3 bg-slate-50 border-t border-slate-100 shrink-0 flex flex-wrap gap-1.5 justify-center">
                       <button
                         onClick={() => handleSendMessage("Tell me about GigFlow ⚡")}
-                        className="text-[11px] font-medium bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
+                        className="text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
                       >
                         Tell me about GigFlow ⚡
                       </button>
                       <button
                         onClick={() => handleSendMessage("How does AI lead scoring work? 🧠")}
-                        className="text-[11px] font-medium bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
+                        className="text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
                       >
                         AI Lead Scoring 🧠
                       </button>
                       <button
                         onClick={() => handleSendMessage("What are the pricing plans? 💰")}
-                        className="text-[11px] font-medium bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
+                        className="text-[11px] font-medium bg-white text-slate-700 border border-slate-200 rounded-full px-3 py-1.5 hover:border-[#0052FF] hover:text-[#0052FF] transition-all cursor-pointer shadow-sm"
                       >
                         Pricing Plans 💰
                       </button>
@@ -495,7 +495,7 @@ export default function ChatbotWidget() {
                       e.preventDefault();
                       handleSendMessage();
                     }}
-                    className="p-3 border-t border-slate-150 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 flex gap-2 shrink-0 items-center"
+                    className="p-3 border-t border-slate-150 bg-slate-50 flex gap-2 shrink-0 items-center"
                   >
                     <input
                       type="text"
@@ -503,12 +503,12 @@ export default function ChatbotWidget() {
                       value={inputMessage}
                       onChange={e => setInputMessage(e.target.value)}
                       disabled={isTyping}
-                      className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl py-2 px-3 text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0052FF] focus:border-[#0052FF] transition-all"
+                      className="flex-1 bg-white border border-slate-200 rounded-xl py-2 px-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0052FF] focus:border-[#0052FF] transition-all"
                     />
                     <button
                       type="submit"
                       disabled={!inputMessage.trim() || isTyping}
-                      className="h-8 w-8 rounded-xl bg-[#0052FF] disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white flex items-center justify-center shrink-0 cursor-pointer shadow-sm shadow-blue-500/20 hover:scale-105 active:scale-95 transition-all"
+                      className="h-8 w-8 rounded-xl bg-[#0052FF] disabled:bg-slate-300 text-white flex items-center justify-center shrink-0 cursor-pointer shadow-sm shadow-blue-500/20 hover:scale-105 active:scale-95 transition-all"
                     >
                       <Send size={14} />
                     </button>
@@ -528,30 +528,30 @@ export default function ChatbotWidget() {
                   {RELEASE_UPDATES.map((item) => (
                     <div
                       key={item.id}
-                      className="bg-white dark:bg-slate-950/80 border border-slate-100 dark:border-slate-800/80 rounded-2xl p-4 shadow-sm relative overflow-hidden"
+                      className="bg-white border border-slate-100 rounded-2xl p-4 shadow-sm relative overflow-hidden"
                     >
                       {/* Brand indicator tag */}
-                      <span className="text-[9px] font-bold px-2 py-0.5 bg-blue-50 dark:bg-blue-900/20 text-[#0052FF] rounded-full border border-blue-100/50 dark:border-blue-900/50">
+                      <span className="text-[9px] font-bold px-2 py-0.5 bg-blue-50 text-[#0052FF] rounded-full border border-blue-100/50">
                         {item.tag}
                       </span>
 
-                      <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 mt-2.5">{item.title}</h3>
+                      <h3 className="text-sm font-bold text-slate-800 mt-2.5">{item.title}</h3>
                       <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-1 mb-2">
                         <Clock size={11} />
                         <span>Released {item.date}</span>
                       </div>
 
-                      <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed border-t border-slate-50 dark:border-slate-900/50 pt-2">
+                      <p className="text-xs text-slate-500 leading-relaxed border-t border-slate-50 pt-2">
                         {item.desc}
                       </p>
 
                       {/* LIKES & FEEDBACK */}
-                      <div className="mt-3.5 pt-2 border-t border-slate-50 dark:border-slate-900/50 flex items-center justify-between">
+                      <div className="mt-3.5 pt-2 border-t border-slate-50 flex items-center justify-between">
                         <button
                           onClick={() => handleLikeUpdate(item.id)}
                           className={`flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1 rounded-lg transition-all border ${likedUpdates[item.id]
                             ? "bg-blue-500 text-white border-blue-600"
-                            : "bg-slate-50 dark:bg-slate-900/60 hover:bg-slate-100 text-slate-500 dark:text-slate-400 border-slate-200/50 dark:border-slate-800"
+                            : "bg-slate-50 hover:bg-slate-100 text-slate-500 border-slate-200/50"
                             }`}
                         >
                           <ThumbsUp size={11} className={likedUpdates[item.id] ? "fill-white" : ""} />
@@ -567,7 +567,7 @@ export default function ChatbotWidget() {
             </div>
 
             {/* BOTTOM NAV BAR */}
-            <div className="bg-white/95 dark:bg-slate-950/95 border-t border-slate-200/60 dark:border-slate-800/80 backdrop-blur px-6 py-2.5 flex justify-around items-center shrink-0">
+            <div className="bg-white/95 border-t border-slate-200/60 backdrop-blur px-6 py-2.5 flex justify-around items-center shrink-0">
               <button
                 onClick={() => {
                   setActiveTab("home");
@@ -575,7 +575,7 @@ export default function ChatbotWidget() {
                 }}
                 className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "home" && !showCalendar
                   ? "text-[#0052FF]"
-                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  : "text-slate-400 hover:text-slate-600"
                   }`}
               >
                 <Home size={18} className={activeTab === "home" && !showCalendar ? "stroke-[2.5px]" : ""} />
@@ -589,7 +589,7 @@ export default function ChatbotWidget() {
                 }}
                 className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "messages" && !showCalendar
                   ? "text-[#0052FF]"
-                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  : "text-slate-400 hover:text-slate-600"
                   }`}
               >
                 <MessageSquare size={18} className={activeTab === "messages" && !showCalendar ? "stroke-[2.5px]" : ""} />
@@ -603,7 +603,7 @@ export default function ChatbotWidget() {
                 }}
                 className={`flex flex-col items-center gap-1 text-[10px] font-medium transition-all ${activeTab === "updates" && !showCalendar
                   ? "text-[#0052FF]"
-                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                  : "text-slate-400 hover:text-slate-600"
                   }`}
               >
                 <Bell size={18} className={activeTab === "updates" && !showCalendar ? "stroke-[2.5px]" : ""} />
@@ -618,16 +618,16 @@ export default function ChatbotWidget() {
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 15 }}
-                  className="absolute inset-0 bg-white dark:bg-slate-950 z-30 flex flex-col p-5"
+                  className="absolute inset-0 bg-white z-30 flex flex-col p-5"
                 >
-                  <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-900 pb-3 mb-4 shrink-0">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4 shrink-0">
                     <div className="flex items-center gap-2">
                       <Calendar className="text-indigo-500" size={18} />
-                      <span className="font-serif text-sm font-bold text-slate-800 dark:text-slate-100">Schedule Quick Call</span>
+                      <span className="font-serif text-sm font-bold text-slate-800">Schedule Quick Call</span>
                     </div>
                     <button
                       onClick={() => setShowCalendar(false)}
-                      className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-400"
+                      className="p-1 rounded-full hover:bg-slate-100 text-slate-400"
                     >
                       <X size={16} />
                     </button>
@@ -635,10 +635,10 @@ export default function ChatbotWidget() {
 
                   {bookingSuccess ? (
                     <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
-                      <div className="h-14 w-14 rounded-full bg-emerald-100 dark:bg-emerald-950/40 text-emerald-500 flex items-center justify-center mb-4 animate-bounce">
+                      <div className="h-14 w-14 rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center mb-4 animate-bounce">
                         <CheckCircle2 size={32} />
                       </div>
-                      <h3 className="text-base font-bold text-slate-800 dark:text-slate-200">Processing Schedule...</h3>
+                      <h3 className="text-base font-bold text-slate-800">Processing Schedule...</h3>
                       <p className="text-xs text-slate-400 mt-1 max-w-[220px]">Saving your slot and sending calendar invitations...</p>
                     </div>
                   ) : (
@@ -655,7 +655,7 @@ export default function ChatbotWidget() {
                                 onClick={() => setBookingDate(date)}
                                 className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingDate === date
                                   ? "bg-[#0052FF] text-white border-blue-600 shadow-sm"
-                                  : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                                  : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
                                   }`}
                               >
                                 {date}
@@ -675,7 +675,7 @@ export default function ChatbotWidget() {
                                 onClick={() => setBookingTime(time)}
                                 className={`text-[11px] font-medium py-2 px-1 text-center rounded-xl border transition-all cursor-pointer ${bookingTime === time
                                   ? "bg-indigo-600 text-white border-indigo-700 shadow-sm"
-                                  : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                                  : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
                                   }`}
                               >
                                 {time}
@@ -695,7 +695,7 @@ export default function ChatbotWidget() {
                               placeholder="you@company.com"
                               value={bookingEmail}
                               onChange={e => setBookingEmail(e.target.value)}
-                              className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl py-2.5 pl-9 pr-4 text-xs text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0052FF]"
+                              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 pl-9 pr-4 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0052FF]"
                             />
                           </div>
                         </div>
@@ -704,7 +704,7 @@ export default function ChatbotWidget() {
                       <button
                         type="submit"
                         disabled={!bookingDate || !bookingTime || !bookingEmail}
-                        className="w-full bg-[#0052FF] disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white font-semibold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:scale-[1.01]"
+                        className="w-full bg-[#0052FF] disabled:bg-slate-300 text-white font-semibold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md shadow-blue-500/10 hover:scale-[1.01]"
                       >
                         Confirm Booking <ArrowRight size={13} />
                       </button>
