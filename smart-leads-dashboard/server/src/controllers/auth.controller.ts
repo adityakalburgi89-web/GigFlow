@@ -73,3 +73,33 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
     next(error);
   }
 };
+
+// ─── SIMPLE RESET PASSWORD (no token/email) ──────────────────────────────────
+export const simpleResetPassword = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { email, newPassword } = req.body;
+
+    if (!email || !newPassword) {
+      res.status(400).json({ success: false, message: 'Email and new password are required' });
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      res.status(400).json({ success: false, message: 'Password must be at least 6 characters' });
+      return;
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(404).json({ success: false, message: 'No account found with that email address' });
+      return;
+    }
+
+    const newPasswordHash = await bcrypt.hash(newPassword, 10);
+    await User.updateOne({ _id: user._id }, { $set: { passwordHash: newPasswordHash } });
+
+    res.status(200).json({ success: true, message: 'Password updated successfully. You can now log in.' });
+  } catch (error) {
+    next(error);
+  }
+};

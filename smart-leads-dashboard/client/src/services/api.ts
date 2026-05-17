@@ -47,6 +47,9 @@ export const auth = {
   login(data: { email: string; password: string }) {
     return api.post<ApiResponse<AuthResponse>>('/auth/login', data);
   },
+  simpleResetPassword(data: { email: string; newPassword: string }) {
+    return api.post<ApiResponse<null>>('/auth/reset-password', data);
+  },
 };
 
 export const leads = {

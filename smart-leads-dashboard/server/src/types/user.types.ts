@@ -8,4 +8,4 @@ export interface IUser {
   createdAt: Date;
 }
 
-export interface IUserDocument extends IUser, Document {}
+export interface IUserDocument extends IUser, Document { }
