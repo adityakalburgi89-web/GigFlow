@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/logo.svg";
+// @ts-ignore
+import chatPopSound from "../../assets/sounds/ChatPop.mp3";
+
 import {
   MessageSquare,
   Send,
@@ -131,6 +134,29 @@ export default function ChatbotWidget() {
     }
   }, [messages, isTyping, activeTab]);
 
+  // Helper to play notification sound
+  const playPopSound = () => {
+    try {
+      const audio = new Audio(chatPopSound);
+      audio.volume = 0.45;
+      audio.play().catch(err => {
+        console.debug("Autoplay blocked by browser policy:", err);
+      });
+    } catch (e) {
+      console.warn("Could not play chat sound:", e);
+    }
+  };
+
+  // Play chat sound ONLY when a new message is received from the bot (except the initial welcome message)
+  useEffect(() => {
+    if (messages.length > 1) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage && lastMessage.sender === "bot") {
+        playPopSound();
+      }
+    }
+  }, [messages.length]);
+
   // Remove badge when user first opens chatbot
   useEffect(() => {
     if (isOpen) {
@@ -227,7 +253,7 @@ export default function ChatbotWidget() {
   );
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans text-left">
+    <div className="fixed bottom-6 right-6 z-50 font-sans text-left flex flex-col items-end">
       {/* CHAT PANEL */}
       <AnimatePresence>
         {isOpen && (

@@ -285,13 +285,13 @@ export function LeadProfileView({
                     <div className="flex items-start gap-2">
                       <div className="h-1.5 w-1.5 rounded-full bg-[#0052FF] mt-1.5 shrink-0 animate-ping" />
                       <p>
-                        <strong>Target Signals:</strong> Key target patterns detected matching active outreach keywords. High intent search behavior detected from original social sources.
+                        <span>Target Signals:</span> Key target patterns detected matching active outreach keywords. High intent search behavior detected from original social sources.
                       </p>
                     </div>
                     <div className="flex items-start gap-2">
                       <div className="h-1.5 w-1.5 rounded-full bg-[#0052FF] mt-1.5 shrink-0" />
                       <p>
-                        <strong>Recommendation:</strong> Initiate automated outreach sequence. The lead conversion possibility is optimized within a 48-hour response window.
+                        <span>Recommendation:</span> Initiate automated outreach sequence. The lead conversion possibility is optimized within a 48-hour response window.
                       </p>
                     </div>
                   </div>

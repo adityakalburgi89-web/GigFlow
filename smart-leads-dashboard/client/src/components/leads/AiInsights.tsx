@@ -111,7 +111,7 @@ export function AiInsights({ leads, isLoading }: AiInsightsProps) {
           <div className="mt-4 flex items-start gap-2 text-sm text-foreground bg-accent/5 rounded-xl p-3.5 border border-accent/10">
             <Zap size={16} className="text-accent shrink-0 mt-0.5" />
             <span>
-              <strong className="text-accent">Recommendation: </strong> 
+              <span className="text-accent">Recommendation: </span> 
               {highlightText}
             </span>
           </div>
