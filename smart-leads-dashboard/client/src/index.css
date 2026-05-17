@@ -1,2 +1,112 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: #FAFAFA;
+  --color-foreground: #0F172A;
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #64748B;
+  --color-accent: #0052FF;
+  --color-accent-secondary: #4D7CFF;
+  --color-accent-foreground: #FFFFFF;
+  --color-border: #E2E8F0;
+  --color-card: #FFFFFF;
+  --color-ring: #0052FF;
+  
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Calistoga", Georgia, serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.08);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+  --shadow-accent: 0 4px 14px rgba(0,82,255,0.25);
+  --shadow-accent-lg: 0 8px 24px rgba(0,82,255,0.35);
+}
+
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-secondary: var(--color-accent-secondary);
+    --accent-foreground: var(--color-accent-foreground);
+    --border: var(--color-border);
+    --card: var(--color-card);
+    --ring: var(--color-ring);
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+
+  ::selection {
+    background-color: rgba(0, 82, 255, 0.15);
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(to right, var(--color-accent), var(--color-accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .gradient-underline {
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0;
+    height: 0.75rem;
+    width: 100%;
+    border-radius: 0.125rem;
+    background: linear-gradient(to right, rgba(0, 82, 255, 0.15), rgba(77, 124, 255, 0.1));
+  }
+  
+  @media (min-width: 768px) {
+    .gradient-underline {
+      bottom: -0.5rem;
+      height: 1rem;
+    }
+  }
+
+  .dot-pattern {
+    background-image: radial-gradient(circle, white 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.03;
+  }
+
+  .gradient-glow {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(150px);
+    pointer-events: none;
+    background: var(--color-accent);
+    opacity: 0.05;
+  }
+}
+
+/* Smooth transitions for interactive table rows */
+@layer components {
+  .table-row-hover {
+    transition: background-color 0.15s ease;
+  }
+  .table-row-hover:hover {
+    background-color: var(--color-muted);
+  }
+}

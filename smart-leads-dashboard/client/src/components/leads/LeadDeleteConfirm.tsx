@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
+import { AlertTriangle } from 'lucide-react';
 import type { Lead } from '../../types';
 
 interface LeadDeleteConfirmProps {
@@ -20,16 +21,17 @@ export function LeadDeleteConfirm({ lead, onClose, onConfirm }: LeadDeleteConfir
 
   return (
     <Modal open onClose={onClose} title="Delete Lead">
-      <p className="text-sm text-gray-600">
-        Are you sure you want to delete <strong>{lead.name}</strong>? This action cannot be undone.
-      </p>
+      <div className="flex gap-4">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-50">
+          <AlertTriangle className="h-6 w-6 text-red-500" />
+        </div>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Are you sure you want to delete <strong className="text-foreground">{lead.name}</strong>? This action cannot be undone.
+        </p>
+      </div>
       <div className="mt-6 flex justify-end gap-3">
-        <Button variant="secondary" onClick={onClose} disabled={isLoading}>
-          Cancel
-        </Button>
-        <Button variant="danger" onClick={handleConfirm} isLoading={isLoading}>
-          Delete
-        </Button>
+        <Button variant="outline" onClick={onClose} disabled={isLoading}>Cancel</Button>
+        <Button variant="danger" onClick={handleConfirm} isLoading={isLoading}>Delete</Button>
       </div>
     </Modal>
   );

@@ -4,14 +4,14 @@ import { useAuth } from '../../context/AuthContext';
 import { ExportButton } from './ExportButton';
 import { LeadStatus, LeadSource } from '../../types';
 import type { LeadFilters as LeadFiltersType } from '../../types';
+import { Input } from '../ui/Input';
+import { Select } from '../ui/Select';
+import { Search } from 'lucide-react';
 
 interface LeadFiltersProps {
   filters: LeadFiltersType;
   onFilterChange: (key: string, value: string) => void;
 }
-
-const inputBase =
-  'rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-500';
 
 export function LeadFilters({ filters, onFilterChange }: LeadFiltersProps) {
   const { user } = useAuth();
@@ -23,38 +23,43 @@ export function LeadFilters({ filters, onFilterChange }: LeadFiltersProps) {
   }, [debouncedSearch, onFilterChange]);
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <input
-        type="text"
-        placeholder="Search name or email..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className={`block min-w-0 flex-1 ${inputBase}`}
-      />
-      <select
+    <div className="flex flex-wrap items-end gap-3">
+      <div className="min-w-0 flex-1">
+        <div className="relative">
+          <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
+          <input
+            type="text"
+            placeholder="Search name or email..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="flex h-12 w-full rounded-xl border border-border bg-transparent pl-11 pr-4 py-2 text-sm text-foreground transition-colors placeholder:text-muted-foreground/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+          />
+        </div>
+      </div>
+      <Select
         value={filters.status || ''}
         onChange={(e) => onFilterChange('status', e.target.value)}
-        className={inputBase}
+        className="w-auto min-w-[140px]"
       >
         <option value="">All Statuses</option>
         {Object.values(LeadStatus).map((s) => <option key={s} value={s}>{s}</option>)}
-      </select>
-      <select
+      </Select>
+      <Select
         value={filters.source || ''}
         onChange={(e) => onFilterChange('source', e.target.value)}
-        className={inputBase}
+        className="w-auto min-w-[140px]"
       >
         <option value="">All Sources</option>
         {Object.values(LeadSource).map((s) => <option key={s} value={s}>{s}</option>)}
-      </select>
-      <select
+      </Select>
+      <Select
         value={filters.sort || 'latest'}
         onChange={(e) => onFilterChange('sort', e.target.value)}
-        className={inputBase}
+        className="w-auto min-w-[120px]"
       >
         <option value="latest">Latest</option>
         <option value="oldest">Oldest</option>
-      </select>
+      </Select>
       {user?.role === 'admin' && <ExportButton filters={filters} />}
     </div>
   );

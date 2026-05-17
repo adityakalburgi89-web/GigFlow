@@ -1,5 +1,7 @@
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+import { Pencil, Trash2 } from 'lucide-react';
 import type { Lead } from '../../types';
 
 interface LeadRowProps {
@@ -8,11 +10,11 @@ interface LeadRowProps {
   onDelete: (lead: Lead) => void;
 }
 
-const statusStyles: Record<string, string> = {
-  New: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
-  Contacted: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300',
-  Qualified: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300',
-  Lost: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300',
+const statusVariantMap: Record<string, 'info' | 'warning' | 'success' | 'danger' | 'default'> = {
+  New: 'info',
+  Contacted: 'warning',
+  Qualified: 'success',
+  Lost: 'danger',
 };
 
 function formatDate(iso: string): string {
@@ -27,34 +29,32 @@ export function LeadRow({ lead, onEdit, onDelete }: LeadRowProps) {
   const { user } = useAuth();
 
   return (
-    <tr className="border-b border-gray-100 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800/50">
-      <td className="whitespace-nowrap px-4 py-3 text-sm font-medium text-gray-900 dark:text-white">
+    <tr className="table-row-hover border-b border-border last:border-b-0">
+      <td className="whitespace-nowrap px-5 py-4 text-sm font-medium text-foreground">
         {lead.name}
       </td>
-      <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+      <td className="whitespace-nowrap px-5 py-4 text-sm text-muted-foreground">
         {lead.email}
       </td>
-      <td className="whitespace-nowrap px-4 py-3">
-        <span
-          className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusStyles[lead.status] || 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'}`}
-        >
+      <td className="whitespace-nowrap px-5 py-4">
+        <Badge variant={statusVariantMap[lead.status] || 'default'}>
           {lead.status}
-        </span>
+        </Badge>
       </td>
-      <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600 dark:text-gray-300">
+      <td className="whitespace-nowrap px-5 py-4 text-sm text-muted-foreground">
         {lead.source}
       </td>
-      <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-500 dark:text-gray-400">
+      <td className="whitespace-nowrap px-5 py-4 text-sm text-muted-foreground">
         {formatDate(lead.createdAt)}
       </td>
-      <td className="whitespace-nowrap px-4 py-3">
-        <div className="flex items-center gap-2">
-          <Button variant="secondary" size="sm" onClick={() => onEdit(lead)}>
-            Edit
+      <td className="whitespace-nowrap px-5 py-4">
+        <div className="flex items-center gap-1.5">
+          <Button variant="ghost" size="sm" onClick={() => onEdit(lead)} className="h-9 w-9 p-0">
+            <Pencil size={15} />
           </Button>
           {user?.role === 'admin' && (
-            <Button variant="danger" size="sm" onClick={() => onDelete(lead)}>
-              Delete
+            <Button variant="ghost" size="sm" onClick={() => onDelete(lead)} className="h-9 w-9 p-0 text-red-500 hover:text-red-600 hover:bg-red-50">
+              <Trash2 size={15} />
             </Button>
           )}
         </div>

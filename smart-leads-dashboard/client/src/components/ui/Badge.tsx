@@ -1,22 +1,34 @@
+import { cva, type VariantProps } from 'class-variance-authority';
 import type { ReactNode } from 'react';
 import { cn } from '../../utils/helpers';
 
-interface BadgeProps {
-  variant?: 'default' | 'success' | 'warning' | 'danger' | 'info';
+const badgeVariants = cva(
+  "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors",
+  {
+    variants: {
+      variant: {
+        default: "bg-muted text-muted-foreground",
+        accent: "bg-accent/10 text-accent border border-accent/20",
+        success: "bg-emerald-50 text-emerald-700 border border-emerald-200",
+        warning: "bg-amber-50 text-amber-700 border border-amber-200",
+        danger: "bg-red-50 text-red-700 border border-red-200",
+        info: "bg-sky-50 text-sky-700 border border-sky-200",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+interface BadgeProps extends VariantProps<typeof badgeVariants> {
   children: ReactNode;
+  className?: string;
 }
 
-const styles: Record<string, string> = {
-  default: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
-  success: 'bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300',
-  warning: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-300',
-  danger: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300',
-  info: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
-};
-
-export function Badge({ variant = 'default', children }: BadgeProps) {
+export function Badge({ variant, className, children }: BadgeProps) {
   return (
-    <span className={cn('inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', styles[variant])}>
+    <span className={cn(badgeVariants({ variant }), className)}>
       {children}
     </span>
   );

@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-//import { useAuth } from '../context/AuthContext';
 import { leads as leadsApi } from '../services/api';
 import { useDebounce } from '../hooks/useDebounce';
 import { Navbar } from '../components/layout/Navbar';
@@ -9,6 +8,8 @@ import { LeadFormModal } from '../components/leads/LeadFormModal';
 import { LeadDeleteConfirm } from '../components/leads/LeadDeleteConfirm';
 import { Pagination } from '../components/leads/Pagination';
 import { Button } from '../components/ui/Button';
+import { Alert } from '../components/ui/Alert';
+import { Plus } from 'lucide-react';
 import type { Lead, PaginationMeta, LeadFilters as LeadFiltersType } from '../types';
 
 interface ModalState {
@@ -76,30 +77,30 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+      <main className="mx-auto max-w-7xl px-6 py-8">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Leads</h1>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Manage your leads, filter, and export data.</p>
+            <h1 className="text-3xl font-serif text-foreground">Leads</h1>
+            <p className="mt-1 text-sm text-muted-foreground">Manage your leads, filter, and export data.</p>
           </div>
-          <button
-            onClick={handleCreate}
-            className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-700"
-          >
-            + New Lead
-          </button>
+          <Button onClick={handleCreate} className="group">
+            <Plus size={18} />
+            New Lead
+          </Button>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <LeadFilters filters={filters} onFilterChange={handleFilterChange} />
         </div>
 
         {error && (
-          <div className="mb-4 flex items-center gap-3 rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300">
-            <span>{error}</span>
-            <Button variant="secondary" size="sm" onClick={fetchLeads}>Retry</Button>
+          <div className="mb-6">
+            <Alert variant="error">
+              {error}
+              <Button variant="ghost" size="sm" onClick={fetchLeads} className="ml-2 -my-0.5">Retry</Button>
+            </Alert>
           </div>
         )}
 

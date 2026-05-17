@@ -1,3 +1,5 @@
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { cn } from '../../utils/helpers';
 import type { PaginationMeta } from '../../types';
 
 interface PaginationProps {
@@ -24,31 +26,36 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
     return result;
   };
 
+  const navBtnClass =
+    "inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 hover:bg-muted hover:text-foreground disabled:pointer-events-none disabled:opacity-40";
+
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 dark:border-gray-700">
-      <p className="text-sm text-gray-500 dark:text-gray-400">
-        Showing {start}–{end} of {total} leads
+    <div className="flex items-center justify-between px-2 py-3">
+      <p className="text-sm text-muted-foreground">
+        Showing <span className="font-medium text-foreground">{start}–{end}</span> of <span className="font-medium text-foreground">{total}</span> leads
       </p>
       <div className="flex items-center gap-1">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-40 dark:text-gray-300 dark:hover:bg-gray-700"
+          className={navBtnClass}
         >
+          <ChevronLeft size={16} />
           Previous
         </button>
         {getPages().map((p, i) =>
           p === '...' ? (
-            <span key={`ellipsis-${i}`} className="px-2 text-sm text-gray-400 dark:text-gray-500">...</span>
+            <span key={`ellipsis-${i}`} className="px-2 text-sm text-muted-foreground">...</span>
           ) : (
             <button
               key={p}
               onClick={() => onPageChange(p)}
-              className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={cn(
+                "h-10 w-10 rounded-xl text-sm font-medium transition-all duration-200",
                 p === page
-                  ? 'bg-indigo-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
-              }`}
+                  ? "bg-gradient-to-r from-accent to-accent-secondary text-white shadow-accent"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              )}
             >
               {p}
             </button>
@@ -57,9 +64,10 @@ export function Pagination({ pagination, onPageChange }: PaginationProps) {
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= pages}
-          className="rounded-md px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-40 dark:text-gray-300 dark:hover:bg-gray-700"
+          className={navBtnClass}
         >
           Next
+          <ChevronRight size={16} />
         </button>
       </div>
     </div>

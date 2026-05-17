@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 import { auth as authApi } from '../services/api';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
+import { Alert } from '../components/ui/Alert';
+import { ArrowRight } from 'lucide-react';
 import type { ApiResponse, AuthResponse } from '../types';
 import type { AxiosResponse } from 'axios';
 
@@ -67,22 +69,40 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 dark:bg-gray-900">
-      <div className="w-full max-w-sm space-y-6 rounded-xl bg-white p-8 shadow-sm dark:bg-gray-800 dark:shadow-black/20">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create an account</h1>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Get started with Smart Leads</p>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 relative">
+      {/* Ambient glow */}
+      <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+
+      <div className="w-full max-w-sm space-y-6 relative z-10">
+        {/* Brand */}
+        <div className="flex items-center justify-center gap-2.5 mb-2">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-accent to-accent-secondary shadow-accent" />
+          <span className="font-serif text-xl font-bold text-foreground">GigFlow</span>
         </div>
-        {apiError && <div className="rounded-lg bg-red-50 p-3 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300">{apiError}</div>}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input label="Name" name="name" type="text" placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} />
-          <Input label="Email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} />
-          <Input label="Password" name="password" type="password" placeholder="At least 8 characters" value={form.password} onChange={handleChange} error={errors.password} />
-          <Button type="submit" className="w-full" isLoading={isLoading}>Create account</Button>
-        </form>
-        <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+
+        <div className="rounded-2xl border border-border bg-card p-8 shadow-lg">
+          <div className="text-center mb-6">
+            <h1 className="text-2xl font-serif text-foreground">Create an account</h1>
+            <p className="mt-1 text-sm text-muted-foreground">Get started with GigFlow</p>
+          </div>
+
+          {apiError && <Alert variant="error" className="mb-4">{apiError}</Alert>}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <Input label="Name" name="name" type="text" placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} />
+            <Input label="Email" name="email" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} />
+            <Input label="Password" name="password" type="password" placeholder="At least 8 characters" value={form.password} onChange={handleChange} error={errors.password} />
+            <Button type="submit" className="w-full group" isLoading={isLoading}>
+              Create account
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </form>
+        </div>
+
+        <p className="text-center text-sm text-muted-foreground">
           Already have an account?{' '}
-          <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400">Sign in</Link>
+          <Link to="/login" className="font-medium text-accent hover:text-accent-secondary transition-colors">Sign in</Link>
         </p>
       </div>
     </div>
