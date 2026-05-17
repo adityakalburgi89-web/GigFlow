@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap, BarChart3, Users, Star, Quote, Menu, X, TrendingUp, CheckCircle2, Globe, Mail, Sparkles, Inbox, Bell, Check } from "lucide-react";
+import { ArrowRight, Zap, BarChart3, Users, Star, Quote, Menu, X, TrendingUp, CheckCircle2, Globe, Sparkles, Inbox, Bell, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "../components/ui/Button";
 import { Card, CardDescription, CardHeader, CardFooter } from "../components/ui/Card";

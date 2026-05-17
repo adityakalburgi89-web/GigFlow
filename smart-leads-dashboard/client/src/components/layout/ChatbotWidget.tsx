@@ -16,7 +16,6 @@ import {
   Bell,
   ThumbsUp,
   CheckCircle2,
-  Zap,
   Search,
   Mail,
   Clock,
