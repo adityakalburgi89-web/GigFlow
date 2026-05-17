@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '../context/AuthContext';
+//import { useAuth } from '../context/AuthContext';
 import { leads as leadsApi } from '../services/api';
 import { useDebounce } from '../hooks/useDebounce';
 import { Navbar } from '../components/layout/Navbar';
